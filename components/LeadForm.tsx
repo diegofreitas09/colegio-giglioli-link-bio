@@ -14,19 +14,26 @@ export default function LeadForm() {
     if (loading) return;
     setLoading(true);
     setStatus("Enviando...");
+
     const form = new FormData(e.currentTarget);
-    const payload = {
-      responsavel: String(form.get("responsavel") || ""),
-      aluno: String(form.get("aluno") || ""),
-      telefone: String(form.get("telefone") || ""),
-      serie: String(form.get("serie") || ""),
-      mensagem: String(form.get("mensagem") || ""),
-      origem: "site"
-    };
+    const responsavel = String(form.get("responsavel") || "").trim();
+    const aluno = String(form.get("aluno") || "").trim();
+    const telefone = String(form.get("telefone") || "").trim();
+    const serie = String(form.get("serie") || "").trim();
+    const mensagem = String(form.get("mensagem") || "").trim();
 
     const supabase = getSupabaseBrowserClient();
     if (supabase) {
-      const { error } = await supabase.from("leads").insert(payload);
+      const { error } = await supabase.from("matricula_leads").insert({
+        nome: responsavel,
+        aluno,
+        telefone,
+        segmento: serie,
+        mensagem: mensagem || null,
+        origem: "site",
+        status: "novo"
+      });
+
       if (!error) {
         e.currentTarget.reset();
         setStatus("Solicitação recebida. A equipe entrará em contato.");
@@ -37,12 +44,13 @@ export default function LeadForm() {
 
     const msg = [
       "Olá! Vim pelo site do Colégio Giglioli e gostaria de informações sobre matrícula. 🚀✨",
-      `Responsável: ${payload.responsavel}`,
-      `Aluno(a): ${payload.aluno}`,
-      `Telefone: ${payload.telefone}`,
-      `Série: ${payload.serie}`,
-      payload.mensagem ? `Mensagem: ${payload.mensagem}` : ""
+      `Responsável: ${responsavel}`,
+      `Aluno(a): ${aluno}`,
+      `Telefone: ${telefone}`,
+      `Série: ${serie}`,
+      mensagem ? `Mensagem: ${mensagem}` : ""
     ].filter(Boolean).join("\n");
+
     window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
     setStatus("Abrimos o WhatsApp com os dados preenchidos.");
     setLoading(false);
