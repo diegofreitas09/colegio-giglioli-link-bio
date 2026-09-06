@@ -12,7 +12,7 @@ const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = (text: string) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
 
 const segments = [
-  { title: "Educação Infantil", text: "Infantil II ao Infantil V", icon: "🪐", tone: "from-fuchsia-400 to-orange-300" },
+  { title: "Educação Infantil", text: "Infantil 2 ao Infantil 5", icon: "🪐", tone: "from-fuchsia-400 to-orange-300" },
   { title: "1º e 2º ano", text: "Primeiras órbitas do Fundamental", icon: "🌎", tone: "from-cyan-400 to-blue-500" },
   { title: "3º ao 5º ano", text: "Novas missões e mais autonomia", icon: "🚀", tone: "from-yellow-300 to-orange-400" }
 ];
@@ -20,7 +20,7 @@ const segments = [
 const values = [
   ["Aprender com sentido", "Experiências que conectam conteúdo, curiosidade e participação.", "✦"],
   ["Acolher de verdade", "Comunicação próxima, rotina organizada e um olhar atento para cada fase.", "💙"],
-  ["Mover corpo e ideias", "Natação, ballet, recreação direcionada e vivências que ampliam o desenvolvimento.", "⚡"]
+  ["Mover corpo e ideias", "Natação, ballet, futsal, recreação direcionada e vivências que ampliam o desenvolvimento.", "⚡"]
 ];
 
 export default function Home() {
