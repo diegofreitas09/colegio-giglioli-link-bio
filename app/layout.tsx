@@ -14,14 +14,17 @@ export const metadata: Metadata = {
     default: "Colégio Giglioli | Educação Infantil ao 5º ano em Fortaleza",
     template: "%s | Colégio Giglioli"
   },
-  description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil II, natação, ballet, futsal, hidroginástica e recreação direcionada.",
+  description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil 2, natação, ballet, futsal, hidroginástica e recreação direcionada.",
   keywords: [
     "Colégio Giglioli",
     "escola em Fortaleza",
     "escola no Canindezinho",
     "Educação Infantil Fortaleza",
     "Ensino Fundamental Fortaleza",
-    "Infantil II",
+    "Infantil 2",
+    "Infantil 3",
+    "Infantil 4",
+    "Infantil 5",
     "5º ano",
     "futsal escolar Fortaleza",
     "matrículas escola Fortaleza"
@@ -79,7 +82,7 @@ const schoolJsonLd = {
   },
   sameAs: ["https://www.instagram.com/colegio.giglioli/"],
   areaServed: "Fortaleza, Ceará",
-  description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza, com inglês, natação, ballet, futsal, hidroginástica e recreação direcionada."
+  description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza, com inglês desde o Infantil 2, natação, ballet, futsal, hidroginástica e recreação direcionada."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
