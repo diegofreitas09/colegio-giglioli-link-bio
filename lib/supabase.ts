@@ -17,6 +17,7 @@ export type MuralPost = {
   imagem_url: string | null;
   categoria: string | null;
   instagram_url: string | null;
+  pagina?: "home" | "mural" | "ambas";
   publicado_em: string | null;
 };
 
