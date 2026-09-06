@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AdminDashboard from "@/components/AdminDashboard";
-import AdminMuralEnhancer from "@/components/AdminMuralEnhancer";
 
 export const metadata: Metadata = {
   title: "Painel Administrativo",
@@ -8,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
-  return (
-    <>
-      <AdminDashboard />
-      <AdminMuralEnhancer />
-    </>
-  );
+  return <AdminDashboard />;
 }
