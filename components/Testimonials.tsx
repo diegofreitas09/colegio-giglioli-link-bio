@@ -5,6 +5,7 @@ import { getSupabaseBrowserClient, type Comentario } from "@/lib/supabase";
 
 export default function Testimonials() {
   const [comments, setComments] = useState<Comentario[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState<"idle" | "success" | "error">("idle");
   const [submitting, setSubmitting] = useState(false);
@@ -31,6 +32,20 @@ export default function Testimonials() {
       });
   }, []);
 
+  useEffect(() => {
+    if (comments.length && currentIndex > comments.length - 1) setCurrentIndex(0);
+  }, [comments.length, currentIndex]);
+
+  function previousComment() {
+    if (!comments.length) return;
+    setCurrentIndex((index) => (index - 1 + comments.length) % comments.length);
+  }
+
+  function nextComment() {
+    if (!comments.length) return;
+    setCurrentIndex((index) => (index + 1) % comments.length);
+  }
+
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submitting) return;
@@ -41,11 +56,10 @@ export default function Testimonials() {
     const depoimento = String(form.get("depoimento") || "").trim();
     const website = String(form.get("website") || "").trim();
 
-    // Campo-isca antispam: bots costumam preencher campos invisíveis.
     if (website) {
       formEl.reset();
       setStatusType("success");
-      setStatus("Depoimento enviado para análise.");
+      setStatus("✓ Mensagem enviada! Obrigado pelo seu depoimento.");
       return;
     }
 
@@ -83,8 +97,10 @@ export default function Testimonials() {
 
     formEl.reset();
     setStatusType("success");
-    setStatus("Obrigado! Seu depoimento foi recebido e ficará aguardando a aprovação da escola antes de aparecer no site.");
+    setStatus("✓ Mensagem enviada! Obrigado pelo seu depoimento. Ele será analisado pela escola antes da publicação.");
   }
+
+  const currentComment = comments[currentIndex];
 
   return (
     <section className="py-20 sm:py-24">
@@ -99,7 +115,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr]">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-start">
           <div className="rounded-[32px] bg-[#071a39] p-7 text-white shadow-2xl sm:p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
@@ -110,23 +126,66 @@ export default function Testimonials() {
             </div>
 
             {loadingComments ? (
-              <div className="mt-8 grid gap-4">
-                {[1, 2].map((item) => (
-                  <div key={item} className="h-28 animate-pulse rounded-2xl border border-white/10 bg-white/5" />
-                ))}
-              </div>
-            ) : comments.length ? (
-              <div className="mt-8 grid gap-4">
-                {comments.map((comment) => (
-                  <blockquote key={comment.id} className="rounded-2xl border border-white/10 bg-white/7 p-5 transition hover:border-sky-300/30 hover:bg-white/10">
-                    <div className="mb-3 text-sm tracking-[.2em] text-yellow-300" aria-hidden="true">★★★★★</div>
-                    <p className="font-bold leading-relaxed text-slate-100">“{comment.depoimento}”</p>
-                    <footer className="mt-4 text-xs font-black text-sky-300">
-                      — {comment.nome}
-                      {comment.origem_url && <a href={comment.origem_url} target="_blank" rel="noopener noreferrer" className="ml-1 hover:text-yellow-300">↗</a>}
+              <div className="mt-8 h-64 animate-pulse rounded-[26px] border border-white/10 bg-white/5" />
+            ) : comments.length && currentComment ? (
+              <div className="mt-8">
+                <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-white/7 shadow-inner">
+                  <blockquote key={currentComment.id} className="min-h-[250px] p-6 sm:p-8">
+                    <div className="mb-4 flex items-center justify-between gap-4">
+                      <div className="text-sm tracking-[.2em] text-yellow-300" aria-hidden="true">★★★★★</div>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-black text-sky-200">
+                        {currentIndex + 1} de {comments.length}
+                      </span>
+                    </div>
+
+                    <p className="text-base font-bold leading-8 text-slate-100 sm:text-lg">
+                      “{currentComment.depoimento}”
+                    </p>
+
+                    <footer className="mt-6 text-sm font-black text-sky-300">
+                      — {currentComment.nome}
+                      {currentComment.origem_url && (
+                        <a href={currentComment.origem_url} target="_blank" rel="noopener noreferrer" className="ml-1 hover:text-yellow-300">↗</a>
+                      )}
                     </footer>
                   </blockquote>
-                ))}
+                </div>
+
+                {comments.length > 1 && (
+                  <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-center gap-2" aria-label="Selecionar depoimento">
+                      {comments.map((comment, index) => (
+                        <button
+                          key={comment.id}
+                          type="button"
+                          onClick={() => setCurrentIndex(index)}
+                          aria-label={`Ver depoimento ${index + 1}`}
+                          aria-current={index === currentIndex ? "true" : undefined}
+                          className={`h-2.5 rounded-full transition-all ${index === currentIndex ? "w-8 bg-yellow-300" : "w-2.5 bg-white/25 hover:bg-white/50"}`}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={previousComment}
+                        className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/7 text-2xl font-black text-white transition hover:border-yellow-300/50 hover:bg-yellow-300 hover:text-[#071a39]"
+                        aria-label="Depoimento anterior"
+                      >
+                        ←
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextComment}
+                        className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/7 text-2xl font-black text-white transition hover:border-yellow-300/50 hover:bg-yellow-300 hover:text-[#071a39]"
+                        aria-label="Próximo depoimento"
+                      >
+                        →
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/5 p-6">
