@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./hero.css";
+import "./enhancements.css";
 import PwaRegister from "@/components/PwaRegister";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://colegio-giglioli-links.netlify.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://colegiogiglioli.com.br";
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     default: "Colégio Giglioli | Educação Infantil ao 5º ano em Fortaleza",
     template: "%s | Colégio Giglioli"
   },
-  description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil II, natação, ballet, hidroginástica e recreação direcionada.",
+  description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil II, natação, ballet, futsal, hidroginástica e recreação direcionada.",
   keywords: [
     "Colégio Giglioli",
     "escola em Fortaleza",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     "Ensino Fundamental Fortaleza",
     "Infantil II",
     "5º ano",
+    "futsal escolar Fortaleza",
     "matrículas escola Fortaleza"
   ],
   alternates: { canonical: siteUrl },
@@ -77,7 +79,7 @@ const schoolJsonLd = {
   },
   sameAs: ["https://www.instagram.com/colegio.giglioli/"],
   areaServed: "Fortaleza, Ceará",
-  description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza."
+  description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza, com inglês, natação, ballet, futsal, hidroginástica e recreação direcionada."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
