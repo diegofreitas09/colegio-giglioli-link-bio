@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
+const successWhatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Acabei de enviar uma solicitação de matrícula pelo site do Colégio Giglioli e gostaria de falar com a equipe. 🚀✨")}`;
 
 type FormStatus = "idle" | "sending" | "success" | "fallback";
 
@@ -15,8 +16,6 @@ export default function LeadForm() {
     e.preventDefault();
     if (status === "sending") return;
 
-    // Guardamos a referência antes do await. Em alguns navegadores/versões do React,
-    // e.currentTarget pode não estar mais disponível quando a chamada assíncrona termina.
     const formEl = e.currentTarget;
     const form = new FormData(formEl);
 
@@ -102,7 +101,7 @@ export default function LeadForm() {
           {status === "success" && <span className="mr-2">✓</span>}
           {message}
           {status === "success" && (
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block text-xs font-black text-yellow-300 underline underline-offset-4">
+            <a href={successWhatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block text-xs font-black text-yellow-300 underline underline-offset-4">
               Prefere falar agora? Abrir WhatsApp →
             </a>
           )}
