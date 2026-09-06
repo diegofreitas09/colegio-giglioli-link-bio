@@ -14,7 +14,7 @@ export default function MuralPage() {
       <SiteHeader />
       <FloatingMascot />
       <main className="min-h-screen bg-[#f7fbff] pt-[78px] text-[#16314f]">
-        <Mural />
+        <Mural context="mural" />
       </main>
     </>
   );
