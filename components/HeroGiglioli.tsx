@@ -19,6 +19,28 @@ export default function HeroGiglioli() {
       <div className="hero-nebula hero-nebula-a" aria-hidden="true" />
       <div className="hero-nebula hero-nebula-b" aria-hidden="true" />
 
+      {/* Estação como cenário de fundo da capa, ancorada no canto direito. */}
+      <div
+        className="pointer-events-none absolute bottom-[-1%] right-[-7%] z-0 h-[72%] w-[68%] opacity-[.68] max-lg:right-[-12%] max-lg:w-[78%] max-md:bottom-[2%] max-md:right-[-28%] max-md:h-[48%] max-md:w-[138%] max-md:opacity-[.42]"
+        aria-hidden="true"
+        style={{
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 16%, #000 38%, #000 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 16%, #000 38%, #000 100%)"
+        }}
+      >
+        <Image
+          src="/assets/estacao-giglioli.png"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 768px) 138vw, (max-width: 1024px) 78vw, 68vw"
+          className="object-contain object-right-bottom drop-shadow-[0_0_34px_rgba(255,170,45,.18)]"
+        />
+      </div>
+
+      {/* Sombra suave para preservar a leitura do texto sobre o cenário. */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[58%] bg-gradient-to-r from-[#03122f]/90 via-[#03122f]/56 to-transparent max-md:w-full max-md:from-[#03122f]/76 max-md:via-[#03122f]/42" aria-hidden="true" />
+
       <svg className="hero-constellation hero-constellation-a" viewBox="0 0 520 300" aria-hidden="true">
         <path d="M20 150 115 74 206 122 294 42 410 104 492 66" />
         <path d="M206 122 256 222 390 242 410 104" />
@@ -30,7 +52,7 @@ export default function HeroGiglioli() {
       <div className="hero-shooting-star hero-shooting-star-a" aria-hidden="true" />
       <div className="hero-shooting-star hero-shooting-star-b" aria-hidden="true" />
 
-      <div className="mx-auto grid min-h-[850px] max-w-7xl items-center gap-4 px-4 pb-14 sm:px-6 lg:grid-cols-[.96fr_1.04fr] lg:gap-8 lg:pb-20">
+      <div className="relative z-10 mx-auto grid min-h-[850px] max-w-7xl items-center gap-4 px-4 pb-14 sm:px-6 lg:grid-cols-[.96fr_1.04fr] lg:gap-8 lg:pb-20">
         <div className="relative z-20 pt-6 lg:pt-0">
           <div className="hero-eyebrow"><span /> EDUCAÇÃO QUE ILUMINA O AMANHÃ</div>
 
@@ -91,19 +113,6 @@ export default function HeroGiglioli() {
           </div>
 
           <div className="hero-hand-note hero-hand-note-top">SONHOS<br/>APRENDIZADO<br/>CONQUISTAS<br/>SEMPRE JUNTOS</div>
-        </div>
-      </div>
-
-      <div className="hero-horizon" aria-hidden="true">
-        <div className="absolute bottom-[-2px] left-[3%] z-[3] w-[min(56vw,500px)] max-md:left-[-2%] max-md:w-[72vw] max-sm:left-[-8%] max-sm:w-[108vw]">
-          <Image
-            src="/assets/estacao-giglioli.png"
-            alt="Estação Giglioli"
-            width={2112}
-            height={704}
-            sizes="(max-width: 640px) 108vw, (max-width: 768px) 72vw, 500px"
-            className="h-auto w-full object-contain drop-shadow-[0_-8px_24px_rgba(255,166,44,0.22)]"
-          />
         </div>
       </div>
     </section>
