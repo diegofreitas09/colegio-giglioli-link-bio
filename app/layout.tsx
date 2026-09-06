@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./hero.css";
 import PwaRegister from "@/components/PwaRegister";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
