@@ -1,5 +1,9 @@
-const CACHE = "giglioli-space-v3";
-const CORE = ["/", "/manifest.webmanifest", "/assets/logo-giglioli.webp", "/assets/gigi-astronauta.webp"];
+const CACHE = "giglioli-space-v4";
+const CORE = [
+  "/manifest.webmanifest",
+  "/assets/logo-giglioli.webp",
+  "/assets/gigi-astronauta.webp"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -22,15 +26,23 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
+  // Páginas sempre vêm da rede. Assim, ao clicar em links internos,
+  // o visitante não recebe uma versão antiga salva pelo PWA.
+  if (event.request.mode === "navigate") {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.ok) {
+        const sameOrigin = new URL(event.request.url).origin === self.location.origin;
+        if (response.ok && sameOrigin) {
           const clone = response.clone();
           caches.open(CACHE).then((cache) => cache.put(event.request, clone));
         }
         return response;
       })
-      .catch(() => caches.match(event.request).then((hit) => hit || caches.match("/")))
+      .catch(() => caches.match(event.request))
   );
 });
