@@ -77,7 +77,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Mural />
+        <Mural context="mural" />
 
         <section id="localizacao" className="space-section bg-[#eef7ff] py-24 text-[#16314f]">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
