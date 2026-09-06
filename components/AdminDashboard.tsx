@@ -273,6 +273,21 @@ export default function AdminDashboard() {
     await refresh();
   }
 
+  async function updateCommentText(comment: Comment, depoimento: string) {
+    if (!supabase) return false;
+    const texto = depoimento.trim();
+    if (!texto) return false;
+
+    const { error } = await supabase
+      .from("comentarios")
+      .update({ depoimento: texto })
+      .eq("id", comment.id);
+
+    if (error) return false;
+    await refresh();
+    return true;
+  }
+
   async function deleteComment(comment: Comment) {
     if (!supabase || !confirm(`Excluir depoimento de ${comment.nome}?`)) return;
     await supabase.from("comentarios").delete().eq("id", comment.id);
@@ -355,7 +370,7 @@ export default function AdminDashboard() {
               deletePost={deletePost}
             />
           )}
-          {tab === "comentarios" && <CommentsPanel comments={comments} toggleComment={toggleComment} deleteComment={deleteComment} />}
+          {tab === "comentarios" && <CommentsPanel comments={comments} toggleComment={toggleComment} updateCommentText={updateCommentText} deleteComment={deleteComment} />}
           {tab === "leads" && <LeadsPanel leads={leads} updateLead={updateLead} />}
         </section>
       </div>
@@ -639,31 +654,111 @@ function PostCard({ post, updatePost, togglePost, deletePost }: {
   );
 }
 
-function CommentsPanel({ comments, toggleComment, deleteComment }: {
+function CommentsPanel({ comments, toggleComment, updateCommentText, deleteComment }: {
   comments: Comment[];
   toggleComment: (c: Comment, f: "aprovado" | "destaque") => void;
+  updateCommentText: (c: Comment, text: string) => Promise<boolean>;
   deleteComment: (c: Comment) => void;
 }) {
   return (
     <div className="grid gap-3">
-      {comments.map((c) => (
-        <article key={c.id} className="rounded-3xl border border-white/10 bg-white/7 p-5 backdrop-blur">
-          <div className="flex flex-wrap items-center gap-2">
-            <strong className="text-sm">{c.nome}</strong>
-            <span className={`rounded-full px-2 py-1 text-[10px] font-black ${c.aprovado ? "bg-emerald-400/15 text-emerald-300" : "bg-orange-400/15 text-orange-200"}`}>{c.aprovado ? "Aprovado" : "Aguardando moderação"}</span>
-            {c.destaque && <span className="rounded-full bg-yellow-300/15 px-2 py-1 text-[10px] font-black text-yellow-200">Destaque</span>}
-          </div>
-          <blockquote className="mt-3 text-sm font-bold leading-relaxed text-slate-200">“{c.depoimento}”</blockquote>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <MiniButton onClick={() => toggleComment(c, "aprovado")}>{c.aprovado ? "Ocultar" : "Aprovar"}</MiniButton>
-            <MiniButton onClick={() => toggleComment(c, "destaque")}>{c.destaque ? "Remover destaque" : "Destacar"}</MiniButton>
-            {c.origem_url && <a className="rounded-full border border-white/10 px-3 py-2 text-[11px] font-black" href={c.origem_url} target="_blank" rel="noopener noreferrer">Origem ↗</a>}
-            <MiniButton danger onClick={() => deleteComment(c)}>Excluir</MiniButton>
-          </div>
-        </article>
+      {comments.map((comment) => (
+        <CommentCard
+          key={comment.id}
+          comment={comment}
+          toggleComment={toggleComment}
+          updateCommentText={updateCommentText}
+          deleteComment={deleteComment}
+        />
       ))}
       {!comments.length && <Empty text="Nenhum depoimento recebido ainda." />}
     </div>
+  );
+}
+
+function CommentCard({ comment, toggleComment, updateCommentText, deleteComment }: {
+  comment: Comment;
+  toggleComment: (c: Comment, f: "aprovado" | "destaque") => void;
+  updateCommentText: (c: Comment, text: string) => Promise<boolean>;
+  deleteComment: (c: Comment) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [text, setText] = useState(comment.depoimento);
+  const [saveMessage, setSaveMessage] = useState("");
+
+  useEffect(() => {
+    setText(comment.depoimento);
+  }, [comment.depoimento]);
+
+  async function saveComment(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!text.trim()) {
+      setSaveMessage("O depoimento não pode ficar vazio.");
+      return;
+    }
+
+    setSaveMessage("Salvando correção...");
+    const ok = await updateCommentText(comment, text);
+    if (!ok) {
+      setSaveMessage("Não foi possível salvar. Tente novamente.");
+      return;
+    }
+
+    setSaveMessage("✓ Texto corrigido e salvo.");
+    setEditing(false);
+    window.setTimeout(() => setSaveMessage(""), 2500);
+  }
+
+  function cancelEdit() {
+    setText(comment.depoimento);
+    setSaveMessage("");
+    setEditing(false);
+  }
+
+  return (
+    <article className="rounded-3xl border border-white/10 bg-white/7 p-5 backdrop-blur">
+      <div className="flex flex-wrap items-center gap-2">
+        <strong className="text-sm">{comment.nome}</strong>
+        <span className={`rounded-full px-2 py-1 text-[10px] font-black ${comment.aprovado ? "bg-emerald-400/15 text-emerald-300" : "bg-orange-400/15 text-orange-200"}`}>{comment.aprovado ? "Aprovado" : "Aguardando moderação"}</span>
+        {comment.destaque && <span className="rounded-full bg-yellow-300/15 px-2 py-1 text-[10px] font-black text-yellow-200">Destaque</span>}
+      </div>
+
+      {editing ? (
+        <form onSubmit={saveComment} className="mt-4 grid gap-3 rounded-2xl border border-sky-300/20 bg-black/10 p-4">
+          <label className="grid gap-2 text-xs font-black text-slate-300">
+            Editar depoimento
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              maxLength={600}
+              className="min-h-32 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-sm font-bold leading-relaxed text-white outline-none focus:border-sky-300"
+            />
+          </label>
+          <div className="flex items-center justify-between gap-3 text-[10px] font-bold text-slate-400">
+            <span>Corrija apenas erros de digitação ou ajuste o texto antes de publicar.</span>
+            <span>{text.length}/600</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button className="rounded-full bg-sky-300 px-4 py-2 text-[11px] font-black text-[#082047]">Salvar correção</button>
+            <MiniButton type="button" onClick={cancelEdit}>Cancelar</MiniButton>
+          </div>
+        </form>
+      ) : (
+        <blockquote className="mt-3 text-sm font-bold leading-relaxed text-slate-200">“{comment.depoimento}”</blockquote>
+      )}
+
+      {saveMessage && <p className={`mt-3 text-xs font-black ${saveMessage.startsWith("✓") ? "text-emerald-300" : "text-sky-200"}`} aria-live="polite">{saveMessage}</p>}
+
+      {!editing && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          <MiniButton onClick={() => { setEditing(true); setSaveMessage(""); }}>Editar texto</MiniButton>
+          <MiniButton onClick={() => toggleComment(comment, "aprovado")}>{comment.aprovado ? "Ocultar" : "Aprovar"}</MiniButton>
+          <MiniButton onClick={() => toggleComment(comment, "destaque")}>{comment.destaque ? "Remover destaque" : "Destacar"}</MiniButton>
+          {comment.origem_url && <a className="rounded-full border border-white/10 px-3 py-2 text-[11px] font-black" href={comment.origem_url} target="_blank" rel="noopener noreferrer">Origem ↗</a>}
+          <MiniButton danger onClick={() => deleteComment(comment)}>Excluir</MiniButton>
+        </div>
+      )}
+    </article>
   );
 }
 
