@@ -30,6 +30,7 @@ export default function LeadForm() {
     const dataNascimento = String(form.get("data_nascimento") || "").trim();
     const telefone = String(form.get("telefone") || "").trim();
     const serie = String(form.get("serie") || "").trim();
+    const turnoPreferencia = String(form.get("turno_preferencia") || "").trim();
     const mensagem = String(form.get("mensagem") || "").trim();
 
     const whatsappMessage = [
@@ -40,6 +41,7 @@ export default function LeadForm() {
       `Data de nascimento: ${formatBirthDate(dataNascimento)}`,
       `Telefone: ${telefone}`,
       `Série de interesse: ${serie}`,
+      `Preferência de turno: ${turnoPreferencia}`,
       mensagem ? `Mensagem: ${mensagem}` : ""
     ].filter(Boolean).join("\n");
 
@@ -58,6 +60,7 @@ export default function LeadForm() {
           data_nascimento: dataNascimento || null,
           telefone,
           segmento: serie,
+          turno_preferencia: turnoPreferencia || null,
           mensagem: mensagem || null,
           origem: "site",
           status: "novo"
@@ -117,6 +120,16 @@ export default function LeadForm() {
           </select>
         </label>
       </div>
+
+      <label className="form-label">
+        Preferência de turno
+        <select className="form-input" name="turno_preferencia" required defaultValue="">
+          <option value="" disabled>Selecione o turno</option>
+          <option>Manhã</option>
+          <option>Tarde</option>
+          <option>Indiferente</option>
+        </select>
+      </label>
 
       <label className="form-label">
         Mensagem
