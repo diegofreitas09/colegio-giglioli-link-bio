@@ -4,8 +4,8 @@ const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = (text: string) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
 
 const features = [
-  { icon: "✦", title: "Infantil II ao 5º ano", accent: "cyan" },
-  { icon: "◎", title: "Inglês desde o Inf. II", accent: "orange" },
+  { icon: "✦", title: "Infantil 2 ao 5º ano", accent: "cyan" },
+  { icon: "◎", title: "Inglês desde o Inf. 2", accent: "orange" },
   { icon: "≋", title: "Natação", accent: "cyan" },
   { icon: "♢", title: "Ballet", accent: "yellow" },
   { icon: "◫", title: "Hidroginástica", accent: "orange" },
@@ -43,7 +43,7 @@ export default function HeroGiglioli() {
           </p>
 
           <p className="hero-copy mt-5 max-w-xl">
-            Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil II, esporte, movimento e experiências que tornam a rotina mais viva.
+            Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil 2, esporte, movimento e experiências que tornam a rotina mais viva.
           </p>
 
           <div className="hero-features mt-7">
