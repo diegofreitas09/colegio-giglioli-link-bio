@@ -1,3 +1,4 @@
+# Colégio Giglioli — configuração de produção
 [build]
   command = "npm run build"
   publish = ".next"
