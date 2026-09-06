@@ -69,7 +69,7 @@ export default function Home() {
                     <span className={`grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br ${segment.tone} text-4xl shadow-xl transition group-hover:scale-105`}>{segment.icon}</span>
                     <h3 className="mt-6 font-[var(--font-display)] text-3xl">{segment.title}</h3>
                     <p className="mt-2 text-sm font-bold text-slate-300">{segment.text}</p>
-                    <a href={wa(`Olá! Quero informações sobre ${segment.title} no Colégio Giglioli.`)} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex text-xs font-black text-yellow-300">Consultar matrícula →</a>
+                    <a href={wa(`Olá! Quero informações sobre ${segment.title} no Colégio Giglioli.`)} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex text-xs font-black text-yellow-300">Vamos nessa nova missão →</a>
                   </article>
                 </AnimatedSection>
               ))}
