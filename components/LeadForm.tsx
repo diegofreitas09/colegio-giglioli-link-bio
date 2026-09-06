@@ -108,10 +108,10 @@ export default function LeadForm() {
           Série de interesse
           <select className="form-input" name="serie" required defaultValue="">
             <option value="" disabled>Selecione</option>
-            <option>Infantil II</option>
-            <option>Infantil III</option>
-            <option>Infantil IV</option>
-            <option>Infantil V</option>
+            <option>Infantil 2</option>
+            <option>Infantil 3</option>
+            <option>Infantil 4</option>
+            <option>Infantil 5</option>
             <option>1º ano</option>
             <option>2º ano</option>
             <option>3º ano</option>
