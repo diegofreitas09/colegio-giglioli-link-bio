@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 
 const secretaria = "5585999725279";
 const direcao = "5585996030509";
+const pdfSolucao = "5585984161882";
 
 const secretariaWhatsapp = `https://wa.me/${secretaria}?text=${encodeURIComponent(
   "Olá! Vim pelo Link da Bio do Colégio Giglioli e gostaria de falar com a Secretaria."
@@ -15,6 +16,10 @@ const secretariaWhatsapp = `https://wa.me/${secretaria}?text=${encodeURIComponen
 
 const direcaoWhatsapp = `https://wa.me/${direcao}?text=${encodeURIComponent(
   "Olá! Vim pelo Link da Bio do Colégio Giglioli e gostaria de falar com a Direção."
+)}`;
+
+const pdfSolucaoWhatsapp = `https://wa.me/${pdfSolucao}?text=${encodeURIComponent(
+  "Olá! Vim pelo projeto do Colégio Giglioli e gostaria de falar com a PDF Solução Educacional."
 )}`;
 
 const localizacao =
@@ -143,7 +148,18 @@ export default function BioPage() {
           Escolha abaixo como você deseja falar com a nossa escola.
         </p>
 
-        <div className="mt-8 grid w-full gap-3.5">
+        <div className="bio-mascot relative mt-3 h-28 w-28 sm:absolute sm:-right-20 sm:top-24 sm:mt-0 sm:h-40 sm:w-40" aria-hidden="true">
+          <div className="absolute inset-4 rounded-full bg-cyan-300/10 blur-2xl" />
+          <Image
+            src="/assets/gigi-mascote.png"
+            alt=""
+            fill
+            sizes="160px"
+            className="object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,.3)]"
+          />
+        </div>
+
+        <div className="mt-5 grid w-full gap-3.5 sm:mt-8">
           <LinkCard
             href={secretariaWhatsapp}
             icon="💬"
@@ -187,6 +203,19 @@ export default function BioPage() {
           COLÉGIO GIGLIOLI • FORTALEZA, CEARÁ
           <span className="text-cyan-300">✦</span>
         </div>
+
+        <a
+          href={pdfSolucaoWhatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 flex flex-col items-center rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-3 text-center transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+          aria-label="Falar com a PDF Solução Educacional pelo WhatsApp"
+        >
+          <span className="text-[10px] font-black uppercase tracking-[.16em] text-slate-400">
+            Criação PDF Solução Educacional
+          </span>
+          <span className="mt-1 text-xs font-black text-cyan-200">(85) 98416-1882</span>
+        </a>
       </section>
 
       <style>{`
@@ -202,8 +231,13 @@ export default function BioPage() {
           0% { transform: translateX(-160%) rotate(18deg); }
           45%, 100% { transform: translateX(230%) rotate(18deg); }
         }
+        @keyframes mascotFloat {
+          0%, 100% { transform: translateY(0) rotate(-2deg); }
+          50% { transform: translateY(-10px) rotate(2deg); }
+        }
         .bio-floating-logo { animation-name: bioFloat; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
         .bio-logo-main { animation: bioPulse 5s ease-in-out infinite; }
+        .bio-mascot { animation: mascotFloat 4.5s ease-in-out infinite; }
         .bio-link::before {
           content: "";
           position: absolute;
@@ -215,7 +249,7 @@ export default function BioPage() {
           pointer-events: none;
         }
         @media (prefers-reduced-motion: reduce) {
-          .bio-floating-logo, .bio-logo-main, .bio-link::before { animation: none !important; }
+          .bio-floating-logo, .bio-logo-main, .bio-mascot, .bio-link::before { animation: none !important; }
         }
       `}</style>
     </main>
