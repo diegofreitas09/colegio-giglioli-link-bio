@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     "futsal escolar Fortaleza",
     "matrículas escola Fortaleza"
   ],
+  alternates: { canonical: siteUrl },
   robots: {
     index: true,
     follow: true,
