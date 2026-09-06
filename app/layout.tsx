@@ -68,7 +68,7 @@ const schoolJsonLd = {
   telephone: "+55 85 99972-5279",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "R. Umarizeiras, 940",
+    streetAddress: "R. Umarizeiras, 929",
     addressLocality: "Fortaleza",
     addressRegion: "CE",
     postalCode: "60810-670",
