@@ -9,6 +9,7 @@ const features = [
   { icon: "≋", title: "Natação", accent: "cyan" },
   { icon: "♢", title: "Ballet", accent: "yellow" },
   { icon: "◫", title: "Hidroginástica", accent: "orange" },
+  { icon: "⚽", title: "Futsal", accent: "yellow" },
   { icon: "✺", title: "Recreação direcionada", accent: "cyan" }
 ];
 
@@ -21,7 +22,9 @@ export default function HeroGiglioli() {
       <svg className="hero-constellation hero-constellation-a" viewBox="0 0 520 300" aria-hidden="true">
         <path d="M20 150 115 74 206 122 294 42 410 104 492 66" />
         <path d="M206 122 256 222 390 242 410 104" />
-        {[ [20,150], [115,74], [206,122], [294,42], [410,104], [492,66], [256,222], [390,242] ].map(([cx,cy], i) => <circle key={i} cx={cx} cy={cy} r={i === 3 ? 5 : 3} />)}
+        {[[20,150],[115,74],[206,122],[294,42],[410,104],[492,66],[256,222],[390,242]].map(([cx,cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r={i === 3 ? 5 : 3} />
+        ))}
       </svg>
 
       <div className="hero-shooting-star hero-shooting-star-a" aria-hidden="true" />
@@ -40,12 +43,12 @@ export default function HeroGiglioli() {
           </p>
 
           <p className="hero-copy mt-5 max-w-xl">
-            Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil II, movimento e experiências que tornam a rotina mais viva.
+            Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil II, esporte, movimento e experiências que tornam a rotina mais viva.
           </p>
 
           <div className="hero-features mt-7">
             {features.map((item) => (
-              <div key={item.title} className={`hero-feature hero-feature-${item.accent}`}>
+              <div key={item.title} className={`hero-feature hero-feature-${item.accent}`} tabIndex={0}>
                 <span className="hero-feature-icon">{item.icon}</span>
                 <strong>{item.title}</strong>
               </div>
@@ -63,7 +66,9 @@ export default function HeroGiglioli() {
               Quero falar com a matrícula
               <span className="hero-arrow">→</span>
             </a>
-            <a href="#sobre" className="hero-secondary-cta">Conhecer a estação <span>⌄</span></a>
+            <a href="/estacao" className="hero-secondary-cta" aria-label="Conhecer a Estação Giglioli">
+              Conhecer a estação <span>→</span>
+            </a>
           </div>
         </div>
 
