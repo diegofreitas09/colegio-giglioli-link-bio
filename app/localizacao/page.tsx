@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description: "Encontre o Colégio Giglioli na Rua Umarizeiras, 929, Canindezinho, Fortaleza."
 };
 
+// Usa o Place ID oficial para abrir a escola correta mesmo dentro de navegadores de apps.
 const mapsRouteUrl =
   "https://www.google.com/maps/dir/?api=1&destination=Col%C3%A9gio%20Giglioli%2C%20R.%20Umarizeiras%2C%20929%2C%20Fortaleza%20-%20CE&destination_place_id=ChIJFaMyY45NxwcRVSWyhKbvG_0";
 
