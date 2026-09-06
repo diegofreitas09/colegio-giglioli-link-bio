@@ -10,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#061329",
     theme_color: "#061329",
     icons: [
-      { src: "/assets/logo-giglioli.webp", sizes: "any", type: "image/webp", purpose: "any maskable" }
+      { src: "/assets/logo-giglioli.webp", sizes: "any", type: "image/webp", purpose: "maskable" }
     ]
   };
 }
