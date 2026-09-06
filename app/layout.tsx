@@ -4,6 +4,7 @@ import "./hero.css";
 import "./enhancements.css";
 import PwaRegister from "@/components/PwaRegister";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import PdfSolucaoCredit from "@/components/PdfSolucaoCredit";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://colegiogiglioli.com.br";
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schoolJsonLd).replace(/</g, "\\u003c") }}
         />
         {children}
+        <PdfSolucaoCredit />
         <GoogleAnalytics />
         <PwaRegister />
       </body>
