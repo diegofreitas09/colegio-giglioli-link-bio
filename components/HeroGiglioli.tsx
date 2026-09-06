@@ -32,7 +32,7 @@ export default function HeroGiglioli() {
           src="/assets/estacao-giglioli.png"
           alt=""
           fill
-          priority
+          quality={70}
           sizes="(max-width: 768px) 138vw, (max-width: 1024px) 78vw, 68vw"
           className="object-contain object-right-bottom drop-shadow-[0_0_34px_rgba(255,170,45,.18)]"
         />
@@ -114,6 +114,7 @@ export default function HeroGiglioli() {
               alt="Gigi, mascote astronauta do Colégio Giglioli"
               fill
               priority
+              quality={82}
               sizes="(max-width: 768px) 92vw, 620px"
               className="hero-mascot-image object-contain object-bottom"
             />
