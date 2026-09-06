@@ -49,7 +49,7 @@ export default function EstacaoPage() {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-full bg-gradient-to-r from-orange-400 to-yellow-300 px-6 text-sm font-black text-[#082047] shadow-[0_18px_45px_rgba(255,166,37,.28)] transition hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(255,190,45,.38)]">
-                  Quero conhecer para matrícula →
+                  Quero conhecer para matricular →
                 </a>
                 <a href="/" className="inline-flex min-h-14 items-center justify-center rounded-full border border-cyan-300/25 bg-white/5 px-6 text-sm font-black text-white backdrop-blur transition hover:-translate-y-1 hover:border-cyan-200/60 hover:shadow-[0_0_28px_rgba(74,210,255,.18)]">
                   ← Voltar para a página inicial
