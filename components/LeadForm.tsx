@@ -7,11 +7,40 @@ const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 
 type FormStatus = "idle" | "sending" | "fallback";
 
+const birthMonths = [
+  ["01", "Janeiro"],
+  ["02", "Fevereiro"],
+  ["03", "Março"],
+  ["04", "Abril"],
+  ["05", "Maio"],
+  ["06", "Junho"],
+  ["07", "Julho"],
+  ["08", "Agosto"],
+  ["09", "Setembro"],
+  ["10", "Outubro"],
+  ["11", "Novembro"],
+  ["12", "Dezembro"]
+] as const;
+
+const currentYear = new Date().getFullYear();
+const birthYears = Array.from({ length: 20 }, (_, index) => currentYear - index);
+const birthDays = Array.from({ length: 31 }, (_, index) => String(index + 1).padStart(2, "0"));
+
 function formatBirthDate(value: string) {
   if (!value) return "";
   const [year, month, day] = value.split("-");
   if (!year || !month || !day) return value;
   return `${day}/${month}/${year}`;
+}
+
+function isValidDate(year: string, month: string, day: string) {
+  if (!year || !month || !day) return false;
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+  return (
+    date.getFullYear() === Number(year) &&
+    date.getMonth() === Number(month) - 1 &&
+    date.getDate() === Number(day)
+  );
 }
 
 export default function LeadForm() {
@@ -27,11 +56,21 @@ export default function LeadForm() {
 
     const responsavel = String(form.get("responsavel") || "").trim();
     const aluno = String(form.get("aluno") || "").trim();
-    const dataNascimento = String(form.get("data_nascimento") || "").trim();
+    const diaNascimento = String(form.get("dia_nascimento") || "").trim();
+    const mesNascimento = String(form.get("mes_nascimento") || "").trim();
+    const anoNascimento = String(form.get("ano_nascimento") || "").trim();
     const telefone = String(form.get("telefone") || "").trim();
     const serie = String(form.get("serie") || "").trim();
     const turnoPreferencia = String(form.get("turno_preferencia") || "").trim();
     const mensagem = String(form.get("mensagem") || "").trim();
+
+    if (!isValidDate(anoNascimento, mesNascimento, diaNascimento)) {
+      setStatus("fallback");
+      setMessage("Confira a data de nascimento informada.");
+      return;
+    }
+
+    const dataNascimento = `${anoNascimento}-${mesNascimento}-${diaNascimento}`;
 
     const whatsappMessage = [
       "Olá! Vim pelo site do Colégio Giglioli e gostaria de informações sobre matrícula. 🚀✨",
@@ -57,7 +96,7 @@ export default function LeadForm() {
         const { error } = await supabase.from("matricula_leads").insert({
           nome: responsavel,
           aluno,
-          data_nascimento: dataNascimento || null,
+          data_nascimento: dataNascimento,
           telefone,
           segmento: serie,
           turno_preferencia: turnoPreferencia || null,
@@ -93,10 +132,26 @@ export default function LeadForm() {
         <input className="form-input" name="aluno" required placeholder="Nome da criança" />
       </label>
 
-      <label className="form-label">
-        Data de nascimento do aluno
-        <input className="form-input" type="date" name="data_nascimento" required />
-      </label>
+      <fieldset className="min-w-0">
+        <legend className="form-label mb-2">Data de nascimento do aluno</legend>
+        <div className="grid grid-cols-[.8fr_1.35fr_1fr] gap-2">
+          <select className="form-input min-w-0 px-3" name="dia_nascimento" required defaultValue="" aria-label="Dia de nascimento">
+            <option value="" disabled>Dia</option>
+            {birthDays.map((day) => <option key={day} value={day}>{day}</option>)}
+          </select>
+
+          <select className="form-input min-w-0 px-3" name="mes_nascimento" required defaultValue="" aria-label="Mês de nascimento">
+            <option value="" disabled>Mês</option>
+            {birthMonths.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+          </select>
+
+          <select className="form-input min-w-0 px-3" name="ano_nascimento" required defaultValue="" aria-label="Ano de nascimento">
+            <option value="" disabled>Ano</option>
+            {birthYears.map((year) => <option key={year} value={year}>{year}</option>)}
+          </select>
+        </div>
+        <p className="mt-2 text-[10px] font-bold text-slate-300">Escolha dia, mês e ano. No celular, o ano pode ser selecionado diretamente.</p>
+      </fieldset>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="form-label">
