@@ -95,11 +95,15 @@ export default function HeroGiglioli() {
       </div>
 
       <div className="hero-horizon" aria-hidden="true">
-        <div className="hero-station">
-          <span className="station-dome" />
-          <span className="station-wing station-wing-left" />
-          <span className="station-wing station-wing-right" />
-          <span className="station-sign">COLÉGIO <b>GIGLIOLI</b></span>
+        <div className="absolute bottom-[-2px] left-[3%] z-[3] w-[min(56vw,500px)] max-md:left-[-2%] max-md:w-[72vw] max-sm:left-[-8%] max-sm:w-[108vw]">
+          <Image
+            src="/assets/estacao-giglioli.png"
+            alt="Estação Giglioli"
+            width={2112}
+            height={704}
+            sizes="(max-width: 640px) 108vw, (max-width: 768px) 72vw, 500px"
+            className="h-auto w-full object-contain drop-shadow-[0_-8px_24px_rgba(255,166,44,0.22)]"
+          />
         </div>
       </div>
     </section>
