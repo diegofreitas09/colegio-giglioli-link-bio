@@ -17,7 +17,9 @@ export default function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#041126]/75 backdrop-blur-xl">
       <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-4 sm:px-6">
         <a href="#topo" className="flex items-center gap-3">
-          <span className="relative h-12 w-12"><Image src="/assets/logo-giglioli.webp" alt="Colégio Giglioli" fill sizes="48px" className="object-contain" /></span>
+          <span className="relative h-14 w-14 shrink-0">
+            <Image src="/assets/logo-giglioli-vetorial.svg" alt="Colégio Giglioli" fill sizes="56px" className="object-contain drop-shadow-[0_3px_10px_rgba(0,0,0,.25)]" priority />
+          </span>
           <span className="hidden leading-tight sm:grid"><strong className="font-[var(--font-display)] text-lg text-white">Colégio Giglioli</strong><small className="text-[10px] font-extrabold tracking-[.16em] text-sky-200/70">ESTAÇÃO DE APRENDIZAGEM</small></span>
         </a>
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Navegação principal">
