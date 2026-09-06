@@ -2,12 +2,12 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://colegiogiglioli.com.br";
-  const pages = ["", "/escola", "/estacao", "/segmentos", "/mural", "/depoimentos", "/localizacao", "/contato"];
+  const pages = ["", "/escola", "/estacao", "/segmentos", "/mural", "/depoimentos", "/localizacao", "/contato", "/privacidade"];
 
   return pages.map((path, index) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
     changeFrequency: index === 0 ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : .8
+    priority: index === 0 ? 1 : path === "/privacidade" ? .4 : .8
   }));
 }
