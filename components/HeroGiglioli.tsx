@@ -95,7 +95,14 @@ export default function HeroGiglioli() {
         </div>
 
         <div className="hero-mascot-stage relative z-10 min-h-[550px] lg:min-h-[690px]">
-          <div className="hero-star-beacon" aria-hidden="true">★</div>
+          <div
+            className="hero-star-beacon"
+            style={{ top: "3%", left: "18%" }}
+            aria-hidden="true"
+          >
+            ★
+            <span className="pointer-events-none absolute bottom-[4%] left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[#fff8c9] shadow-[0_0_8px_#fff,0_0_18px_#ffd84d]" />
+          </div>
           <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
           <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
           <div className="hero-planet hero-planet-left" aria-hidden="true" />
