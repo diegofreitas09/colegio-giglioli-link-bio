@@ -14,7 +14,7 @@ const wa = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Conheci a
 
 const atividades = [
   ["✦", "Educação Infantil ao 5º ano", "Uma jornada contínua de aprendizagem, descoberta e autonomia."],
-  ["◎", "Inglês desde o Infantil II", "Contato com o idioma desde cedo, integrado à rotina escolar."],
+  ["◎", "Inglês desde o Infantil 2", "Contato com o idioma desde cedo, integrado à rotina escolar."],
   ["≋", "Natação", "Movimento, segurança aquática e desenvolvimento corporal."],
   ["⚽", "Futsal", "Esporte, convivência, coordenação e espírito de equipe."],
   ["♢", "Ballet", "Expressão, postura, musicalidade e sensibilidade artística."],
