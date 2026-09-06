@@ -629,6 +629,14 @@ function PostCard({ post, updatePost, togglePost, deletePost }: {
           </div>
           <h4 className="mt-1 truncate font-[var(--font-display)] text-xl font-extrabold">{post.titulo}</h4>
           <p className="mt-1 line-clamp-2 text-xs font-bold leading-relaxed text-slate-300">{post.texto || "Sem legenda."}</p>
+          {post.publicado && post.publicado_em && (
+            <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-black uppercase tracking-[.08em] text-emerald-200/85">
+              <span>🕒 Publicado em</span>
+              <time dateTime={post.publicado_em}>
+                {new Date(post.publicado_em).toLocaleDateString("pt-BR", { timeZone: "America/Fortaleza" })} às {new Date(post.publicado_em).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Fortaleza" })}
+              </time>
+            </p>
+          )}
         </div>
       </div>
 
