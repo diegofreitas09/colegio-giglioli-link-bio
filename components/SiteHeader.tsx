@@ -8,15 +8,15 @@ const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const links = [
-    ["A escola", "#sobre"], ["Segmentos", "#segmentos"], ["Mural", "#mural"],
-    ["Depoimentos", "#depoimentos"], ["Localização", "#localizacao"], ["Contato", "#contato"]
+    ["A escola", "/estacao"], ["Segmentos", "/#segmentos"], ["Mural", "/#mural"],
+    ["Depoimentos", "/#depoimentos"], ["Localização", "/#localizacao"], ["Contato", "/#contato"]
   ];
   const cta = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Vim pelo site do Colégio Giglioli e quero informações sobre matrícula. 🚀")}`;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#041126]/75 backdrop-blur-xl">
       <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href="#topo" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           <span className="relative h-14 w-14 shrink-0">
             <Image src="/assets/logo-giglioli-vetorial.svg" alt="Colégio Giglioli" fill sizes="56px" className="object-contain drop-shadow-[0_3px_10px_rgba(0,0,0,.25)]" priority />
           </span>
