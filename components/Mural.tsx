@@ -54,14 +54,6 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
     });
   }, [context]);
 
-  useEffect(() => {
-    if (posts.length <= 1) return;
-    const timer = window.setInterval(() => {
-      setPostIndex((current) => (current + 1) % posts.length);
-    }, 6000);
-    return () => window.clearInterval(timer);
-  }, [posts.length]);
-
   function previousPost() {
     setPostIndex((current) => (current <= 0 ? posts.length - 1 : current - 1));
   }
