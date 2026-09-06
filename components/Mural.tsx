@@ -11,11 +11,13 @@ const fallbackPosts: MuralPost[] = [
 ];
 
 type MuralContext = "home" | "mural";
+type StatusType = "idle" | "success" | "error";
 
 export default function Mural({ context = "home" }: { context?: MuralContext }) {
   const [posts, setPosts] = useState<MuralPost[]>(fallbackPosts);
   const [comments, setComments] = useState<Comentario[]>([]);
   const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState<StatusType>("idle");
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -46,25 +48,32 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
 
   async function submitComment(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = new FormData(e.currentTarget);
+    setStatus("");
+    setStatusType("idle");
+
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
     const nome = String(form.get("nome") || "").trim();
     const depoimento = String(form.get("depoimento") || "").trim();
     if (!nome || !depoimento) return;
 
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {
-      setStatus("O mural será habilitado assim que o Supabase do site for conectado.");
+      setStatusType("error");
+      setStatus("Não foi possível enviar agora. Tente novamente em instantes.");
       return;
     }
 
     const { error } = await supabase.from("comentarios").insert({ nome, depoimento, aprovado: false });
     if (error) {
+      setStatusType("error");
       setStatus("Não foi possível enviar agora. Tente novamente em instantes.");
       return;
     }
 
-    e.currentTarget.reset();
-    setStatus("Depoimento enviado. Ele será publicado após moderação da escola.");
+    formElement.reset();
+    setStatusType("success");
+    setStatus("✓ Mensagem enviada! Obrigado pelo seu depoimento. Ele será analisado pela escola antes da publicação.");
   }
 
   return (
@@ -130,7 +139,16 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
               <label className="mt-5 block text-xs font-black text-slate-600">Nome<input name="nome" required className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-sky-300 focus:ring-2" placeholder="Seu nome" /></label>
               <label className="mt-4 block text-xs font-black text-slate-600">Depoimento<textarea name="depoimento" required maxLength={600} className="mt-2 min-h-28 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-sky-300 focus:ring-2" placeholder="Conte sua experiência com o Colégio Giglioli" /></label>
               <button className="mt-4 w-full rounded-2xl bg-[#123c7b] px-5 py-3.5 text-sm font-black text-white transition hover:bg-[#0b2d61]">Enviar para moderação</button>
-              <p className="mt-3 min-h-5 text-xs font-bold text-slate-500" aria-live="polite">{status}</p>
+
+              {status && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className={`mt-4 rounded-2xl border px-4 py-3 text-sm font-black ${statusType === "success" ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-rose-200 bg-rose-50 text-rose-700"}`}
+                >
+                  {status}
+                </div>
+              )}
             </form>
           </AnimatedSection>
         </div>
