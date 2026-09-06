@@ -1,5 +1,5 @@
 # Colégio Giglioli — configuração de produção
-# Deploy: formulário corrigido + logo vetorial vazada
+# Deploy: mural da página inicial sincronizado + correções recentes
 [build]
   command = "npm run build"
   publish = ".next"
