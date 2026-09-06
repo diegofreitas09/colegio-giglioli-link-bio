@@ -81,7 +81,7 @@ export default function HeroGiglioli() {
 
           <div className="hero-mascot-wrap">
             <Image
-              src="/assets/gigi-astronauta.webp"
+              src="/assets/capa-do-site.png"
               alt="Gigi, mascote astronauta do Colégio Giglioli"
               fill
               priority
