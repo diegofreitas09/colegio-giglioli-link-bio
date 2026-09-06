@@ -4,6 +4,7 @@ import "./hero.css";
 import "./enhancements.css";
 import PwaRegister from "@/components/PwaRegister";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieConsent from "@/components/CookieConsent";
 import PdfSolucaoCredit from "@/components/PdfSolucaoCredit";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://colegiogiglioli.com.br";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Colégio Giglioli | Educação Infantil ao 5º ano em Fortaleza",
-    template: "%s | Colégio Giglioli"
+    template: "%s"
   },
   description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada.",
   keywords: [
@@ -30,7 +31,6 @@ export const metadata: Metadata = {
     "futsal escolar Fortaleza",
     "matrículas escola Fortaleza"
   ],
-  alternates: { canonical: siteUrl },
   robots: {
     index: true,
     follow: true,
@@ -40,7 +40,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Colégio Giglioli | Uma constelação de aprendizagem",
     description: "Conheça a Estação Giglioli e fale com a equipe de matrícula.",
-    url: siteUrl,
     siteName: "Colégio Giglioli",
     images: ["/assets/gigi-astronauta.webp"],
     type: "website",
@@ -97,6 +96,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {children}
         <PdfSolucaoCredit />
         <GoogleAnalytics />
+        <CookieConsent />
         <PwaRegister />
       </body>
     </html>
