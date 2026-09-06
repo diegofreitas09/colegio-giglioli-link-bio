@@ -16,6 +16,7 @@ type StatusType = "idle" | "success" | "error";
 export default function Mural({ context = "home" }: { context?: MuralContext }) {
   const [posts, setPosts] = useState<MuralPost[]>(fallbackPosts);
   const [comments, setComments] = useState<Comentario[]>([]);
+  const [commentIndex, setCommentIndex] = useState(0);
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState<StatusType>("idle");
 
@@ -42,9 +43,20 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
         .limit(9)
     ]).then(([postRes, commentRes]) => {
       if (!postRes.error) setPosts((postRes.data || []) as MuralPost[]);
-      if (!commentRes.error) setComments((commentRes.data || []) as Comentario[]);
+      if (!commentRes.error) {
+        setComments((commentRes.data || []) as Comentario[]);
+        setCommentIndex(0);
+      }
     });
   }, [context]);
+
+  function previousComment() {
+    setCommentIndex((current) => (current <= 0 ? comments.length - 1 : current - 1));
+  }
+
+  function nextComment() {
+    setCommentIndex((current) => (current >= comments.length - 1 ? 0 : current + 1));
+  }
 
   async function submitComment(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -75,6 +87,8 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
     setStatusType("success");
     setStatus("✓ Mensagem enviada! Obrigado pelo seu depoimento. Ele será analisado pela escola antes da publicação.");
   }
+
+  const activeComment = comments[commentIndex];
 
   return (
     <section id="mural" className="space-section bg-[#f7fbff] py-24 text-[#16314f]">
@@ -116,14 +130,49 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
             <div className="rounded-[30px] bg-[#071a39] p-7 text-white shadow-2xl">
               <span className="section-kicker">VOZ DAS FAMÍLIAS</span>
               <h3 className="mt-2 font-[var(--font-display)] text-4xl leading-none">Depoimentos reais, sempre moderados.</h3>
-              {comments.length ? (
-                <div className="mt-6 grid gap-3">
-                  {comments.map((comment) => (
-                    <blockquote key={comment.id} className="rounded-2xl border border-white/10 bg-white/7 p-5">
-                      <p className="font-bold leading-relaxed text-slate-100">“{comment.depoimento}”</p>
-                      <footer className="mt-3 text-xs font-black text-sky-300">— {comment.nome}{comment.origem_url && <a href={comment.origem_url} target="_blank" rel="noopener noreferrer"> ↗</a>}</footer>
-                    </blockquote>
-                  ))}
+
+              {activeComment ? (
+                <div className="mt-6">
+                  <blockquote className="min-h-[220px] rounded-3xl border border-white/10 bg-white/[.07] p-6 sm:min-h-[245px] sm:p-7">
+                    <div className="mb-5 text-4xl leading-none text-yellow-300" aria-hidden="true">“</div>
+                    <p className="text-base font-bold leading-relaxed text-slate-100 sm:text-lg">{activeComment.depoimento}</p>
+                    <footer className="mt-5 text-sm font-black text-sky-300">— {activeComment.nome}{activeComment.origem_url && <a href={activeComment.origem_url} target="_blank" rel="noopener noreferrer"> ↗</a>}</footer>
+                  </blockquote>
+
+                  <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex items-center gap-2" aria-label="Selecionar depoimento">
+                      {comments.map((comment, index) => (
+                        <button
+                          key={comment.id}
+                          type="button"
+                          onClick={() => setCommentIndex(index)}
+                          aria-label={`Ver depoimento ${index + 1}`}
+                          aria-current={index === commentIndex ? "true" : undefined}
+                          className={`h-2.5 rounded-full transition-all ${index === commentIndex ? "w-8 bg-yellow-300" : "w-2.5 bg-white/30 hover:bg-white/55"}`}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-black text-slate-400">{commentIndex + 1} de {comments.length}</span>
+                      <button
+                        type="button"
+                        onClick={previousComment}
+                        className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition hover:-translate-y-0.5 hover:border-sky-300/50 hover:bg-white/15"
+                        aria-label="Depoimento anterior"
+                      >
+                        ←
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextComment}
+                        className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition hover:-translate-y-0.5 hover:border-sky-300/50 hover:bg-white/15"
+                        aria-label="Próximo depoimento"
+                      >
+                        →
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <p className="mt-5 max-w-xl text-sm font-bold leading-relaxed text-slate-300">Assim que validarmos comentários reais do Instagram ou recebermos novos relatos pelo site, eles aparecem aqui após aprovação.</p>
