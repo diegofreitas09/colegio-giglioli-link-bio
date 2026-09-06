@@ -6,21 +6,20 @@ import FloatingMascot from "@/components/FloatingMascot";
 
 export const metadata: Metadata = {
   title: "Conheça a Estação Giglioli",
-  description: "Conheça a proposta, os espaços, as atividades e a experiência educacional do Colégio Giglioli em Fortaleza."
+  description: "Conheça o Colégio Giglioli: Infantil 2 ao 5º ano, inglês desde o Infantil 3, natação, futsal, ballet, hidroginástica e recreação direcionada."
 };
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Conheci a Estação Giglioli pelo site e quero informações sobre matrícula. 🚀✨")}`;
 
 const atividades = [
-  ["✦", "Educação Infantil ao 5º ano", "Uma jornada contínua de aprendizagem, descoberta e autonomia."],
+  ["✦", "Infantil 2 ao 5º ano", "Uma jornada contínua de aprendizagem, descoberta e autonomia, da Educação Infantil ao Ensino Fundamental."],
   ["◎", "Inglês desde o Infantil 3", "Contato com o idioma desde cedo, integrado à rotina escolar."],
   ["≋", "Natação", "Movimento, segurança aquática e desenvolvimento corporal."],
   ["⚽", "Futsal", "Esporte, convivência, coordenação e espírito de equipe."],
   ["♢", "Ballet", "Expressão, postura, musicalidade e sensibilidade artística."],
   ["◫", "Hidroginástica", "Atividade física orientada e bem-estar em ambiente aquático."],
-  ["✺", "Recreação direcionada", "Brincadeiras com intencionalidade, convivência e desenvolvimento."],
-  ["★", "Acolhimento", "Uma escola próxima das famílias e atenta às necessidades de cada etapa."]
+  ["✺", "Recreação direcionada", "Brincadeiras com intencionalidade, convivência e desenvolvimento."]
 ];
 
 export default function EstacaoPage() {
@@ -39,13 +38,13 @@ export default function EstacaoPage() {
             <div className="relative z-10">
               <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/5 px-4 py-2 text-xs font-black tracking-[.16em] text-cyan-200">
                 <i className="h-2 w-2 rounded-full bg-yellow-300 shadow-[0_0_18px_rgba(253,224,71,.9)]" />
-                ESTAÇÃO GIGLIOLI
+                ESTAÇÃO GIGLIOLI • INFORMAÇÕES ATUALIZADAS
               </span>
               <h1 className="mt-6 max-w-3xl font-[var(--font-display)] text-5xl font-black leading-[.94] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-                Uma escola para <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-yellow-200 to-orange-300">descobrir, crescer e brilhar.</span>
+                Do Infantil 2 ao 5º ano, <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-yellow-200 to-orange-300">cada etapa é uma nova missão.</span>
               </h1>
               <p className="mt-6 max-w-2xl text-base font-bold leading-8 text-slate-300 sm:text-lg">
-                A Estação Giglioli é o jeito que encontramos de representar uma escola viva: cada aluno percorre sua própria jornada, encontra novos desafios e continua conectado à mesma constelação de cuidado, aprendizagem e parceria com a família.
+                A Estação Giglioli acompanha o aluno do Infantil 2 ao 5º ano, com inglês desde o Infantil 3 e uma rotina que integra aprendizagem, acolhimento, natação, futsal, ballet, hidroginástica e recreação direcionada.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-full bg-gradient-to-r from-orange-400 to-yellow-300 px-6 text-sm font-black text-[#082047] shadow-[0_18px_45px_rgba(255,166,37,.28)] transition hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(255,190,45,.38)]">
@@ -72,7 +71,7 @@ export default function EstacaoPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <span className="text-xs font-black tracking-[.18em] text-cyan-300">EXPERIÊNCIAS DA ESTAÇÃO</span>
             <h2 className="mt-3 max-w-3xl font-[var(--font-display)] text-4xl font-black tracking-tight sm:text-5xl">Muito além da sala de aula.</h2>
-            <p className="mt-4 max-w-3xl font-bold leading-7 text-slate-300">Passe o mouse sobre os módulos: cada um acende como uma estrela da constelação Giglioli.</p>
+            <p className="mt-4 max-w-3xl font-bold leading-7 text-slate-300">Conheça o que faz parte da rotina atual do Colégio Giglioli. Passe o mouse sobre os módulos: cada um acende como uma estrela da nossa constelação.</p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {atividades.map(([icon, title, text]) => (
@@ -90,7 +89,7 @@ export default function EstacaoPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid gap-6 lg:grid-cols-3">
               <article className="rounded-[30px] bg-white p-7 shadow-xl shadow-sky-900/8">
-                <span className="text-xs font-black tracking-[.16em] text-sky-600">MISSÃO</span>
+                <span className="text-xs font-black tracking-[.16em] text-sky-600">APRENDIZAGEM</span>
                 <h2 className="mt-3 font-[var(--font-display)] text-3xl font-black">Aprender com sentido.</h2>
                 <p className="mt-4 font-bold leading-7 text-slate-500">Conteúdo, curiosidade, participação e experiências conectadas à realidade de cada fase.</p>
               </article>
@@ -102,7 +101,7 @@ export default function EstacaoPage() {
               <article className="rounded-[30px] bg-white p-7 shadow-xl shadow-sky-900/8">
                 <span className="text-xs font-black tracking-[.16em] text-sky-600">MOVIMENTO</span>
                 <h2 className="mt-3 font-[var(--font-display)] text-3xl font-black">Corpo e mente em ação.</h2>
-                <p className="mt-4 font-bold leading-7 text-slate-500">Natação, futsal, ballet, hidroginástica e recreação ampliam a experiência escolar.</p>
+                <p className="mt-4 font-bold leading-7 text-slate-500">Natação, futsal, ballet, hidroginástica e recreação direcionada ampliam a experiência escolar.</p>
               </article>
             </div>
           </div>
