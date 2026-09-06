@@ -91,7 +91,6 @@ export default function HeroGiglioli() {
           </div>
 
           <div className="hero-hand-note hero-hand-note-top">SONHOS<br/>APRENDIZADO<br/>CONQUISTAS<br/>SEMPRE JUNTOS</div>
-          <div className="hero-hand-note hero-hand-note-bottom">AQUI COMEÇAM<br/>GRANDES HISTÓRIAS</div>
         </div>
       </div>
 
