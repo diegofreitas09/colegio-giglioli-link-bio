@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { getSupabaseBrowserClient, type Comentario, type MuralPost } from "@/lib/supabase";
 import AnimatedSection from "./AnimatedSection";
@@ -118,11 +119,18 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
               <div className="relative overflow-hidden rounded-[34px] border border-sky-900/10 bg-[#071a39] shadow-2xl shadow-sky-900/15">
                 <article className="relative min-h-[430px] sm:min-h-[520px] lg:min-h-[600px]">
                   {activePost.imagem_url ? (
-                    <div
-                      key={activePost.id}
-                      className="absolute inset-0 animate-[fadeIn_.45s_ease-out] bg-cover bg-center"
-                      style={{ backgroundImage: `linear-gradient(to top, rgba(4,18,43,.97) 0%, rgba(4,18,43,.54) 38%, rgba(4,18,43,.08) 72%), url(${activePost.imagem_url})` }}
-                    />
+                    <div key={activePost.id} className="absolute inset-0 animate-[fadeIn_.35s_ease-out]">
+                      <Image
+                        src={activePost.imagem_url}
+                        alt=""
+                        fill
+                        loading="lazy"
+                        quality={58}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 96vw, 1200px"
+                        className="object-cover object-center"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#04122b] via-[#04122b]/55 to-transparent" aria-hidden="true" />
+                    </div>
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-[#0d3f7d] via-[#178fc9] to-[#ffd24d]" />
                   )}
@@ -137,14 +145,14 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
                       </div>
                       <h3 className="font-[var(--font-display)] text-4xl leading-none sm:text-5xl lg:text-6xl">{activePost.titulo}</h3>
                       {activePost.texto && <p className="mt-4 max-w-2xl text-sm font-bold leading-relaxed text-white/90 sm:text-base">{activePost.texto}</p>}
-                      {activePost.instagram_url && <a href={activePost.instagram_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black text-yellow-200 backdrop-blur-md transition hover:bg-white/20">Ver publicação ↗</a>}
+                      {activePost.instagram_url && <a href={activePost.instagram_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black text-yellow-200 backdrop-blur-md transition-colors hover:bg-white/20">Ver publicação ↗</a>}
                     </div>
                   </div>
 
                   {posts.length > 1 && (
                     <>
-                      <button type="button" onClick={previousPost} aria-label="Foto anterior" className="absolute left-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[#061329]/55 text-2xl font-black text-white shadow-xl backdrop-blur-md transition hover:scale-105 hover:bg-[#061329]/80 sm:left-5">←</button>
-                      <button type="button" onClick={nextPost} aria-label="Próxima foto" className="absolute right-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[#061329]/55 text-2xl font-black text-white shadow-xl backdrop-blur-md transition hover:scale-105 hover:bg-[#061329]/80 sm:right-5">→</button>
+                      <button type="button" onClick={previousPost} aria-label="Foto anterior" className="absolute left-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[#061329]/55 text-2xl font-black text-white shadow-xl backdrop-blur-md transition-transform hover:scale-105 sm:left-5">←</button>
+                      <button type="button" onClick={nextPost} aria-label="Próxima foto" className="absolute right-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-[#061329]/55 text-2xl font-black text-white shadow-xl backdrop-blur-md transition-transform hover:scale-105 sm:right-5">→</button>
                     </>
                   )}
                 </article>
@@ -159,7 +167,7 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
                       onClick={() => setPostIndex(index)}
                       aria-label={`Ver foto ${index + 1}: ${post.titulo}`}
                       aria-current={index === postIndex ? "true" : undefined}
-                      className={`h-2.5 rounded-full transition-all ${index === postIndex ? "w-9 bg-[#123c7b]" : "w-2.5 bg-[#123c7b]/25 hover:bg-[#123c7b]/50"}`}
+                      className={`h-2.5 rounded-full transition-[width,background-color] ${index === postIndex ? "w-9 bg-[#123c7b]" : "w-2.5 bg-[#123c7b]/25 hover:bg-[#123c7b]/50"}`}
                     />
                   ))}
                 </div>
@@ -193,15 +201,15 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
                           onClick={() => setCommentIndex(index)}
                           aria-label={`Ver depoimento ${index + 1}`}
                           aria-current={index === commentIndex ? "true" : undefined}
-                          className={`h-2.5 rounded-full transition-all ${index === commentIndex ? "w-8 bg-yellow-300" : "w-2.5 bg-white/30 hover:bg-white/55"}`}
+                          className={`h-2.5 rounded-full transition-[width,background-color] ${index === commentIndex ? "w-8 bg-yellow-300" : "w-2.5 bg-white/30 hover:bg-white/55"}`}
                         />
                       ))}
                     </div>
 
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-black text-slate-400">{commentIndex + 1} de {comments.length}</span>
-                      <button type="button" onClick={previousComment} className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition hover:-translate-y-0.5 hover:border-sky-300/50 hover:bg-white/15" aria-label="Depoimento anterior">←</button>
-                      <button type="button" onClick={nextComment} className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition hover:-translate-y-0.5 hover:border-sky-300/50 hover:bg-white/15" aria-label="Próximo depoimento">→</button>
+                      <button type="button" onClick={previousComment} className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition-transform hover:-translate-y-0.5" aria-label="Depoimento anterior">←</button>
+                      <button type="button" onClick={nextComment} className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-xl font-black text-white transition-transform hover:-translate-y-0.5" aria-label="Próximo depoimento">→</button>
                     </div>
                   </div>
                 </div>
@@ -218,7 +226,7 @@ export default function Mural({ context = "home" }: { context?: MuralContext }) 
               <p className="mt-2 text-sm font-bold leading-relaxed text-slate-500">O comentário não entra automaticamente. A escola aprova antes da publicação.</p>
               <label className="mt-5 block text-xs font-black text-slate-600">Nome<input name="nome" required className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-sky-300 focus:ring-2" placeholder="Seu nome" /></label>
               <label className="mt-4 block text-xs font-black text-slate-600">Depoimento<textarea name="depoimento" required maxLength={600} className="mt-2 min-h-28 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-sky-300 focus:ring-2" placeholder="Conte sua experiência com o Colégio Giglioli" /></label>
-              <button className="mt-4 w-full rounded-2xl bg-[#123c7b] px-5 py-3.5 text-sm font-black text-white transition hover:bg-[#0b2d61]">Enviar para moderação</button>
+              <button className="mt-4 w-full rounded-2xl bg-[#123c7b] px-5 py-3.5 text-sm font-black text-white transition-colors hover:bg-[#0b2d61]">Enviar para moderação</button>
 
               {status && (
                 <div role="status" aria-live="polite" className={`mt-4 rounded-2xl border px-4 py-3 text-sm font-black ${statusType === "success" ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-rose-200 bg-rose-50 text-rose-700"}`}>

@@ -19,7 +19,6 @@ export default function HeroGiglioli() {
       <div className="hero-nebula hero-nebula-a" aria-hidden="true" />
       <div className="hero-nebula hero-nebula-b" aria-hidden="true" />
 
-      {/* Estação como cenário de fundo da capa, ancorada no canto direito. */}
       <div
         className="pointer-events-none absolute bottom-[-1%] right-[-7%] z-0 h-[72%] w-[68%] opacity-[.68] max-lg:right-[-12%] max-lg:w-[78%] max-md:bottom-[2%] max-md:right-[-28%] max-md:h-[48%] max-md:w-[138%] max-md:opacity-[.42]"
         aria-hidden="true"
@@ -32,13 +31,13 @@ export default function HeroGiglioli() {
           src="/assets/estacao-giglioli.png"
           alt=""
           fill
-          quality={70}
+          priority
+          quality={58}
           sizes="(max-width: 768px) 138vw, (max-width: 1024px) 78vw, 68vw"
           className="object-contain object-right-bottom drop-shadow-[0_0_34px_rgba(255,170,45,.18)]"
         />
       </div>
 
-      {/* Sombra suave para preservar a leitura do texto sobre o cenário. */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[58%] bg-gradient-to-r from-[#03122f]/90 via-[#03122f]/56 to-transparent max-md:w-full max-md:from-[#03122f]/76 max-md:via-[#03122f]/42" aria-hidden="true" />
 
       <svg className="hero-constellation hero-constellation-a" viewBox="0 0 520 300" aria-hidden="true">
@@ -114,7 +113,7 @@ export default function HeroGiglioli() {
               alt="Gigi, mascote astronauta do Colégio Giglioli"
               fill
               priority
-              quality={82}
+              quality={72}
               sizes="(max-width: 768px) 92vw, 620px"
               className="hero-mascot-image object-contain object-bottom"
             />

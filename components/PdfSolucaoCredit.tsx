@@ -1,13 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const whatsappUrl = `https://wa.me/5585984161882?text=${encodeURIComponent(
   "Olá! Vim por um projeto desenvolvido pela PDF Solução Educacional e gostaria de falar com vocês."
 )}`;
 
-const logoUrl =
-  "https://raw.githubusercontent.com/diegofreitas09/coracoralina/main/logo-pdf-web.png";
+const logoUrl = "https://raw.githubusercontent.com/diegofreitas09/coracoralina/main/logo-pdf-web.png";
 
 export default function PdfSolucaoCredit() {
   const pathname = usePathname();
@@ -20,13 +20,17 @@ export default function PdfSolucaoCredit() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mx-auto flex w-full max-w-[430px] items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-center shadow-[0_14px_35px_rgba(0,0,0,.18)] transition hover:border-cyan-300/25 hover:bg-white/[0.07] sm:w-fit"
+        className="mx-auto flex w-full max-w-[430px] items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-center shadow-[0_14px_35px_rgba(0,0,0,.18)] transition-colors hover:border-cyan-300/25 hover:bg-white/[0.07] sm:w-fit"
         aria-label="Falar com a PDF Solução Educacional pelo WhatsApp"
       >
-        <img
+        <Image
           src={logoUrl}
           alt="Logo PDF Solução Educacional"
-          className="h-12 w-auto shrink-0 object-contain sm:h-14"
+          width={112}
+          height={56}
+          quality={60}
+          sizes="112px"
+          className="h-12 w-24 shrink-0 object-contain sm:h-14 sm:w-28"
         />
         <span className="min-w-0 text-left">
           <span className="block text-[10px] font-black uppercase tracking-[.15em] text-slate-400">

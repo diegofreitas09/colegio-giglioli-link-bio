@@ -5,8 +5,8 @@ import FloatingMascot from "@/components/FloatingMascot";
 import HeroGiglioli from "@/components/HeroGiglioli";
 import AnimatedSection from "@/components/AnimatedSection";
 import LeadForm from "@/components/LeadForm";
-import Mural from "@/components/Mural";
-import ScrollEffects from "@/components/ScrollEffects";
+import LazyMural from "@/components/LazyMural";
+import DeferredMap from "@/components/DeferredMap";
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = (text: string) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
@@ -27,7 +27,6 @@ export default function Home() {
   return (
     <>
       <SpaceBackground />
-      <ScrollEffects />
       <SiteHeader />
       <FloatingMascot />
 
@@ -44,7 +43,7 @@ export default function Home() {
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {values.map(([title, text, icon], i) => (
                 <AnimatedSection key={title} delay={i * .06}>
-                  <article className="rounded-[28px] border border-sky-900/10 bg-white p-6 shadow-xl shadow-sky-900/7 transition hover:-translate-y-1">
+                  <article className="rounded-[28px] border border-sky-900/10 bg-white p-6 shadow-xl shadow-sky-900/7 transition-transform hover:-translate-y-1">
                     <span className="grid h-12 w-12 place-items-center rounded-2xl bg-sky-50 text-2xl">{icon}</span>
                     <h3 className="mt-5 font-[var(--font-display)] text-2xl text-[#123c7b]">{title}</h3>
                     <p className="mt-2 text-sm font-bold leading-relaxed text-slate-500">{text}</p>
@@ -65,8 +64,8 @@ export default function Home() {
             <div className="mt-10 grid gap-5 md:grid-cols-3">
               {segments.map((segment, i) => (
                 <AnimatedSection key={segment.title} delay={i * .08}>
-                  <article className="group rounded-[30px] border border-white/10 bg-white/6 p-7 shadow-2xl backdrop-blur transition hover:-translate-y-2 hover:border-sky-300/30">
-                    <span className={`grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br ${segment.tone} text-4xl shadow-xl transition group-hover:scale-105`}>{segment.icon}</span>
+                  <article className="group rounded-[30px] border border-white/10 bg-white/6 p-7 shadow-2xl backdrop-blur transition-transform hover:-translate-y-2 hover:border-sky-300/30">
+                    <span className={`grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br ${segment.tone} text-4xl shadow-xl transition-transform group-hover:scale-105`}>{segment.icon}</span>
                     <h3 className="mt-6 font-[var(--font-display)] text-3xl">{segment.title}</h3>
                     <p className="mt-2 text-sm font-bold text-slate-300">{segment.text}</p>
                     <a href={wa(`Olá! Quero informações sobre ${segment.title} no Colégio Giglioli.`)} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex text-xs font-black text-yellow-300">Vamos nessa nova missão →</a>
@@ -77,7 +76,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Mural context="mural" />
+        <LazyMural context="mural" />
 
         <section id="localizacao" className="space-section bg-[#eef7ff] py-24 text-[#16314f]">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
@@ -91,9 +90,7 @@ export default function Home() {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={.08}>
-              <div className="overflow-hidden rounded-[30px] border border-sky-900/10 bg-white p-2 shadow-2xl shadow-sky-900/10">
-                <iframe title="Localização do Colégio Giglioli" src="https://www.google.com/maps?q=R.%20Umarizeiras%2C%20929%20-%20Canindezinho%2C%20Fortaleza%20-%20CE&output=embed" className="h-[430px] w-full rounded-[24px] border-0" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
-              </div>
+              <DeferredMap />
             </AnimatedSection>
           </div>
         </section>

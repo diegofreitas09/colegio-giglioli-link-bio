@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 
@@ -90,6 +89,7 @@ export default function LeadForm() {
     setMessage("Registrando seus dados e abrindo o WhatsApp...");
 
     try {
+      const { getSupabaseBrowserClient } = await import("@/lib/supabase");
       const supabase = getSupabaseBrowserClient();
 
       if (supabase) {
@@ -196,7 +196,7 @@ export default function LeadForm() {
         Autorizo o contato do Colégio Giglioli para responder esta solicitação.
       </label>
 
-      <button disabled={status === "sending"} className="rounded-2xl bg-gradient-to-r from-orange-400 to-yellow-300 px-5 py-4 text-sm font-black text-[#082047] shadow-xl shadow-orange-500/20 transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60">
+      <button disabled={status === "sending"} className="rounded-2xl bg-gradient-to-r from-orange-400 to-yellow-300 px-5 py-4 text-sm font-black text-[#082047] shadow-xl shadow-orange-500/20 transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60">
         {status === "sending" ? "Abrindo WhatsApp..." : "Enviar solicitação pelo WhatsApp →"}
       </button>
 
