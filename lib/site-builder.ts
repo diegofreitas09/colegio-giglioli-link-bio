@@ -6,8 +6,8 @@ export type SiteModuleStyle = {
   text_color?: string;
   accent_color?: string;
   title_color?: string;
-  font_preset?: "display" | "body" | "serif" | "mono" | string;
-  align?: "left" | "center" | "right" | string;
+  font_preset?: "display" | "body" | "serif" | "mono";
+  align?: "left" | "center" | "right";
 };
 
 export type PublishedSiteModule = {
@@ -30,6 +30,9 @@ export async function getPublishedSiteModules(pageSlug: string): Promise<Publish
 
   try {
     const client = createClient(url, key, {
+      global: {
+        fetch: (input, init) => fetch(input, { ...init, cache: "no-store" })
+      },
       auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
     });
 
