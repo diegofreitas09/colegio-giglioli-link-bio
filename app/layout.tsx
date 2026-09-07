@@ -54,10 +54,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/assets/logo-giglioli-vetorial.svg", type: "image/svg+xml", sizes: "any" }
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }
     ],
-    shortcut: "/assets/logo-giglioli-vetorial.svg",
-    apple: "/assets/logo-giglioli-vetorial.svg"
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg"
   },
   manifest: "/manifest.webmanifest"
 };
