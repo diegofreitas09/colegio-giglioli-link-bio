@@ -1,2 +1,0 @@
-Colégio Giglioli — pacote de otimização PageSpeed/Core Web Vitals publicado em 06/09/2026.
-Imagens, mural, mapa, JavaScript, cache, LCP, acessibilidade e animações otimizados.
