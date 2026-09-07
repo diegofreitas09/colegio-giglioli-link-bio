@@ -12,13 +12,16 @@ const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: "Colégio Giglioli",
   title: {
-    default: "Colégio Giglioli | Educação Infantil ao 5º ano em Fortaleza",
+    default: "Colégio Giglioli | Site Oficial em Fortaleza",
     template: "%s"
   },
-  description: "Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada.",
+  description: "Site oficial do Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada.",
   keywords: [
     "Colégio Giglioli",
+    "Colegio Giglioli",
+    "site oficial Colégio Giglioli",
     "escola em Fortaleza",
     "escola no Canindezinho",
     "Educação Infantil Fortaleza",
@@ -31,7 +34,6 @@ export const metadata: Metadata = {
     "futsal escolar Fortaleza",
     "matrículas escola Fortaleza"
   ],
-  alternates: { canonical: siteUrl },
   robots: {
     index: true,
     follow: true,
@@ -39,8 +41,9 @@ export const metadata: Metadata = {
   },
   verification: googleVerification ? { google: googleVerification } : undefined,
   openGraph: {
-    title: "Colégio Giglioli | Uma constelação de aprendizagem",
-    description: "Conheça a Estação Giglioli e fale com a equipe de matrícula.",
+    title: "Colégio Giglioli | Site Oficial em Fortaleza",
+    description: "Conheça o Colégio Giglioli, da Educação Infantil ao 5º ano, e fale com a equipe de matrícula.",
+    url: siteUrl,
     siteName: "Colégio Giglioli",
     images: ["/assets/gigi-astronauta.webp"],
     type: "website",
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Colégio Giglioli | Uma constelação de aprendizagem",
+    title: "Colégio Giglioli | Site Oficial em Fortaleza",
     description: "Educação Infantil ao 5º ano em Fortaleza.",
     images: ["/assets/gigi-astronauta.webp"]
   },
@@ -71,23 +74,36 @@ export const viewport: Viewport = {
 
 const schoolJsonLd = {
   "@context": "https://schema.org",
-  "@type": "School",
-  name: "Colégio Giglioli",
-  url: siteUrl,
-  image: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
-  logo: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
-  telephone: "+55 85 99972-5279",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "R. Umarizeiras, 929",
-    addressLocality: "Fortaleza",
-    addressRegion: "CE",
-    postalCode: "60810-670",
-    addressCountry: "BR"
-  },
-  sameAs: ["https://www.instagram.com/colegio.giglioli/"],
-  areaServed: "Fortaleza, Ceará",
-  description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza, com inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada."
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Colégio Giglioli",
+      alternateName: "Giglioli",
+      inLanguage: "pt-BR"
+    },
+    {
+      "@type": "School",
+      "@id": `${siteUrl}/#school`,
+      name: "Colégio Giglioli",
+      url: `${siteUrl}/`,
+      image: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
+      logo: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
+      telephone: "+55 85 99972-5279",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "R. Umarizeiras, 929",
+        addressLocality: "Fortaleza",
+        addressRegion: "CE",
+        postalCode: "60810-670",
+        addressCountry: "BR"
+      },
+      sameAs: ["https://www.instagram.com/colegio.giglioli/"],
+      areaServed: "Fortaleza, Ceará",
+      description: "Escola de Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza, com inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada."
+    }
+  ]
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
