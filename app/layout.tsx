@@ -53,8 +53,11 @@ export const metadata: Metadata = {
     images: ["/assets/gigi-astronauta.webp"]
   },
   icons: {
-    icon: "/assets/logo-giglioli.webp",
-    apple: "/assets/logo-giglioli.webp"
+    icon: [
+      { url: "/assets/logo-giglioli-vetorial.svg", type: "image/svg+xml", sizes: "any" }
+    ],
+    shortcut: "/assets/logo-giglioli-vetorial.svg",
+    apple: "/assets/logo-giglioli-vetorial.svg"
   },
   manifest: "/manifest.webmanifest"
 };
@@ -71,7 +74,8 @@ const schoolJsonLd = {
   "@type": "School",
   name: "Colégio Giglioli",
   url: siteUrl,
-  image: `${siteUrl}/assets/logo-giglioli.webp`,
+  image: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
+  logo: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
   telephone: "+55 85 99972-5279",
   address: {
     "@type": "PostalAddress",
