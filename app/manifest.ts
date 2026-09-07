@@ -11,13 +11,13 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#061329",
     icons: [
       {
-        src: "/assets/logo-giglioli-vetorial.svg",
+        src: "/favicon.svg",
         sizes: "any",
         type: "image/svg+xml",
         purpose: "any"
       },
       {
-        src: "/assets/logo-giglioli-vetorial.svg",
+        src: "/favicon.svg",
         sizes: "any",
         type: "image/svg+xml",
         purpose: "maskable"
