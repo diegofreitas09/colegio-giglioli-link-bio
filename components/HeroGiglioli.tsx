@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { fontFamilyFromPreset, type SiteModuleContent, type SiteModuleStyle } from "@/lib/site-builder";
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = (text: string) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
@@ -13,9 +14,21 @@ const features = [
   { icon: "✺", title: "Recreação direcionada", accent: "cyan" }
 ];
 
-export default function HeroGiglioli() {
+function text(content: SiteModuleContent | undefined, key: string, fallback: string) {
+  const value = content?.[key];
+  return typeof value === "string" && value.trim() ? value : fallback;
+}
+
+export default function HeroGiglioli({ content, style }: { content?: SiteModuleContent; style?: SiteModuleStyle }) {
+  const background = typeof style?.background === "string" ? style.background : undefined;
+  const titleColor = typeof style?.title_color === "string" ? style.title_color : undefined;
+  const textColor = typeof style?.text_color === "string" ? style.text_color : undefined;
+  const accent = typeof style?.accent_color === "string" ? style.accent_color : undefined;
+  const family = fontFamilyFromPreset(style?.font_preset);
+  const align = style?.align === "center" || style?.align === "right" ? style.align : "left";
+
   return (
-    <section className="giglioli-hero relative overflow-hidden pt-[108px] text-white md:pt-[122px]">
+    <section className="giglioli-hero relative overflow-hidden pt-[108px] text-white md:pt-[122px]" style={{ background }}>
       <div className="hero-nebula hero-nebula-a" aria-hidden="true" />
       <div className="hero-nebula hero-nebula-b" aria-hidden="true" />
 
@@ -52,19 +65,19 @@ export default function HeroGiglioli() {
       <div className="hero-shooting-star hero-shooting-star-b" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto grid min-h-[850px] max-w-7xl items-center gap-4 px-4 pb-14 sm:px-6 lg:grid-cols-[.96fr_1.04fr] lg:gap-8 lg:pb-20">
-        <div className="relative z-20 pt-6 lg:pt-0">
-          <div className="hero-eyebrow"><span /> EDUCAÇÃO QUE ILUMINA O AMANHÃ</div>
+        <div className="relative z-20 pt-6 lg:pt-0" style={{ fontFamily: family, textAlign: align }}>
+          <div className="hero-eyebrow" style={accent ? { color: accent } : undefined}><span /> {text(content, "eyebrow", "EDUCAÇÃO QUE ILUMINA O AMANHÃ")}</div>
 
-          <h1 className="hero-title mt-5">
-            Seu filho <span className="hero-title-highlight">brilha</span> aqui.
+          <h1 className="hero-title mt-5" style={titleColor ? { color: titleColor } : undefined}>
+            {text(content, "title_before", "Seu filho")} <span className="hero-title-highlight">{text(content, "title_highlight", "brilha")}</span> {text(content, "title_after", "aqui.")}
           </h1>
 
-          <p className="hero-constellation-copy mt-5 max-w-xl">
-            No Colégio Giglioli, cada aluno faz parte de uma <strong>grande constelação.</strong>
+          <p className="hero-constellation-copy mt-5 max-w-xl" style={textColor ? { color: textColor } : undefined}>
+            {text(content, "constellation", "No Colégio Giglioli, cada aluno faz parte de uma grande constelação.")}
           </p>
 
-          <p className="hero-copy mt-5 max-w-xl">
-            Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil 3, esporte, movimento e experiências que tornam a rotina mais viva.
+          <p className="hero-copy mt-5 max-w-xl" style={textColor ? { color: textColor } : undefined}>
+            {text(content, "description", "Educação Infantil ao 5º ano com aprendizagem, acolhimento, inglês desde o Infantil 3, esporte, movimento e experiências que tornam a rotina mais viva.")}
           </p>
 
           <div className="hero-features mt-7">
@@ -76,7 +89,7 @@ export default function HeroGiglioli() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className={`mt-8 flex flex-col gap-3 sm:flex-row ${align === "center" ? "sm:justify-center" : align === "right" ? "sm:justify-end" : ""}`}>
             <a
               href={wa("Olá! Vim pelo site do Colégio Giglioli e quero informações sobre matrícula. 🚀✨")}
               target="_blank"
@@ -84,11 +97,11 @@ export default function HeroGiglioli() {
               className="hero-enrollment-cta"
             >
               <span className="hero-chat-icon">◯</span>
-              Quero falar com a matrícula
+              {text(content, "primary_cta", "Quero falar com a matrícula")}
               <span className="hero-arrow">→</span>
             </a>
             <a href="/estacao" className="hero-secondary-cta" aria-label="Conhecer a Estação Giglioli">
-              Conhecer a estação <span>→</span>
+              {text(content, "secondary_cta", "Conhecer a estação")} <span>→</span>
             </a>
           </div>
         </div>
