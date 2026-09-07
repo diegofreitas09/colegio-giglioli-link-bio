@@ -5,7 +5,13 @@ import Mural from "@/components/Mural";
 
 export const metadata: Metadata = {
   title: "Mural | Colégio Giglioli",
-  description: "Acompanhe vivências, eventos, projetos e registros do Colégio Giglioli."
+  description: "Acompanhe vivências, eventos, projetos e registros do Colégio Giglioli.",
+  alternates: { canonical: "/mural" },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: { index: false, follow: true }
+  }
 };
 
 export default function MuralPage() {
