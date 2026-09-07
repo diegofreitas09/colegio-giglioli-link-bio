@@ -18,6 +18,7 @@ type Item = {
   link_label: string | null;
   destaque: boolean;
   ordem: number;
+  data_evento: string | null;
   inicio_em: string | null;
   fim_em: string | null;
   created_at: string;
@@ -67,6 +68,18 @@ function formatDate(value: string | null) {
   }).format(new Date(value));
 }
 
+function formatEventDate(value: string | null) {
+  if (!value) return null;
+  const date = new Date(value.length === 10 ? `${value}T12:00:00` : value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "America/Fortaleza"
+  }).format(date);
+}
+
 export default function InstitutionalCollectionPage({ section }: { section: Section }) {
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
   const [items, setItems] = useState<Item[]>([]);
@@ -84,7 +97,7 @@ export default function InstitutionalCollectionPage({ section }: { section: Sect
 
       const { data } = await supabase
         .from("site_collections")
-        .select("id,section,titulo,descricao,imagem_url,link_url,link_label,destaque,ordem,inicio_em,fim_em,created_at")
+        .select("id,section,titulo,descricao,imagem_url,link_url,link_label,destaque,ordem,data_evento,inicio_em,fim_em,created_at")
         .eq("section", section)
         .eq("publicado", true)
         .order("destaque", { ascending: false })
@@ -158,6 +171,12 @@ export default function InstitutionalCollectionPage({ section }: { section: Sect
                       <h2 className="font-[var(--font-display)] text-2xl font-black text-[#123c7b]">{item.titulo}</h2>
                       {item.descricao ? <p className="mt-3 text-sm font-bold leading-6 text-slate-500">{item.descricao}</p> : null}
 
+                      {section === "projetos" && item.data_evento ? (
+                        <p className="mt-4 inline-flex items-center rounded-full bg-cyan-50 px-3 py-1.5 text-xs font-black text-sky-700">
+                          📅 {formatEventDate(item.data_evento)}
+                        </p>
+                      ) : null}
+
                       {section === "campanhas" && (item.inicio_em || item.fim_em) ? (
                         <p className="mt-4 text-xs font-black text-sky-700">
                           {item.inicio_em ? `Início: ${formatDate(item.inicio_em)}` : ""}
@@ -168,7 +187,7 @@ export default function InstitutionalCollectionPage({ section }: { section: Sect
 
                       {item.link_url ? (
                         <a href={item.link_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center rounded-full bg-[#123c7b] px-5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-[#0b529d]">
-                          {item.link_label || (section === "parceiros" ? "Acessar plataforma ↗" : "Saiba mais ↗")}
+                          {item.link_label || (section === "parceiros" ? "Acessar parceiro ↗" : "Saiba mais ↗")}
                         </a>
                       ) : section === "campanhas" ? (
                         <a href={matriculaWhatsapp} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center rounded-full bg-gradient-to-r from-orange-400 to-yellow-300 px-5 text-xs font-black text-[#082047]">

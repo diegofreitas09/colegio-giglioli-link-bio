@@ -100,7 +100,7 @@ export default async function Home() {
         ))}
       </main>
 
-      {footerModule?.visible !== false && <SiteFooter module={footerModule} />}
+      {footerModule && footerModule.visible !== false ? <SiteFooter module={footerModule} /> : null}
     </>
   );
 }
