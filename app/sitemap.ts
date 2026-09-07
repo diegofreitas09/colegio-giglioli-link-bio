@@ -1,13 +1,21 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://colegiogiglioli.com.br";
-  const pages = ["", "/escola", "/estacao", "/segmentos", "/mural", "/depoimentos", "/localizacao", "/contato", "/privacidade"];
+  const base = "https://colegiogiglioli.com.br";
+  const pages = [
+    { path: "", changeFrequency: "weekly" as const, priority: 1 },
+    { path: "/escola", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/estacao", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/segmentos", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/depoimentos", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/localizacao", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/contato", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/privacidade", changeFrequency: "yearly" as const, priority: 0.3 }
+  ];
 
-  return pages.map((path, index) => ({
+  return pages.map(({ path, changeFrequency, priority }) => ({
     url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: index === 0 ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : path === "/privacidade" ? .4 : .8
+    changeFrequency,
+    priority
   }));
 }
