@@ -3,7 +3,8 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Links | Colégio Giglioli",
-  description: "Acesse os principais canais oficiais do Colégio Giglioli."
+  description: "Acesse os principais canais oficiais do Colégio Giglioli.",
+  alternates: { canonical: "/bio" }
 };
 
 const secretaria = "5585999725279";
