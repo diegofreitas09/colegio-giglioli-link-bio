@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://colegiogiglioli.com.br";
   const pages = [
-    { path: "", changeFrequency: "weekly" as const, priority: 1 },
+    { path: "/", changeFrequency: "weekly" as const, priority: 1 },
     { path: "/escola", changeFrequency: "monthly" as const, priority: 0.8 },
     { path: "/estacao", changeFrequency: "monthly" as const, priority: 0.8 },
     { path: "/segmentos", changeFrequency: "monthly" as const, priority: 0.8 },
