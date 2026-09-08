@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import SpaceBackground from "@/components/SpaceBackground";
 import SiteHeader from "@/components/SiteHeader";
@@ -18,6 +19,10 @@ import {
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
 const wa = (text: string) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`;
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" }
+};
 
 const defaultSegments = [
   { title: "Educação Infantil", text: "Infantil 2 ao Infantil 5", icon: "🪐", tone: "from-fuchsia-400 to-orange-300" },
