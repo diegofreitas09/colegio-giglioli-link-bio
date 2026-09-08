@@ -3,7 +3,8 @@ import InstitutionalCollectionPage from "@/components/InstitutionalCollectionPag
 
 export const metadata: Metadata = {
   title: "Nossa Estrutura | Colégio Giglioli",
-  description: "Conheça os espaços e ambientes do Colégio Giglioli."
+  description: "Conheça os espaços e ambientes do Colégio Giglioli.",
+  alternates: { canonical: "/estrutura" }
 };
 
 export default function EstruturaPage() {
