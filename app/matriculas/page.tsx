@@ -3,7 +3,8 @@ import InstitutionalCollectionPage from "@/components/InstitutionalCollectionPag
 
 export const metadata: Metadata = {
   title: "Campanhas de Matrículas | Colégio Giglioli",
-  description: "Acompanhe campanhas, plantões e condições de matrícula do Colégio Giglioli."
+  description: "Acompanhe campanhas, plantões e condições de matrícula do Colégio Giglioli.",
+  alternates: { canonical: "/matriculas" }
 };
 
 export default function MatriculasPage() {
