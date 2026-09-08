@@ -3,7 +3,8 @@ import InstitutionalCollectionPage from "@/components/InstitutionalCollectionPag
 
 export const metadata: Metadata = {
   title: "Nossos Parceiros | Colégio Giglioli",
-  description: "Conheça os parceiros, editoras e plataformas do Colégio Giglioli."
+  description: "Conheça os parceiros, editoras e plataformas do Colégio Giglioli.",
+  alternates: { canonical: "/parceiros" }
 };
 
 export default function ParceirosPage() {
