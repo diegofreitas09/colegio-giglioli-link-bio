@@ -5,8 +5,17 @@ import SpaceBackground from "@/components/SpaceBackground";
 import FloatingMascot from "@/components/FloatingMascot";
 
 export const metadata: Metadata = {
-  title: "Conheça a Estação Giglioli",
-  description: "Conheça o Colégio Giglioli: Infantil 2 ao 5º ano, inglês desde o Infantil 3, natação, futsal, ballet, hidroginástica e recreação direcionada."
+  title: "Estação Giglioli | Estrutura e atividades em Fortaleza",
+  description:
+    "Conheça a Estação Giglioli em Fortaleza: Educação Infantil ao 5º ano, inglês desde o Infantil 3, natação, futsal, ballet, hidroginástica e recreação.",
+  alternates: { canonical: "/estacao" },
+  openGraph: {
+    title: "Estação Giglioli | Estrutura e atividades em Fortaleza",
+    description:
+      "Veja como aprendizagem, acolhimento, esporte e experiências complementares fazem parte da rotina do Colégio Giglioli.",
+    url: "/estacao",
+    type: "website"
+  }
 };
 
 const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP || "5585999725279";
@@ -46,12 +55,15 @@ export default function EstacaoPage() {
               <p className="mt-6 max-w-2xl text-base font-bold leading-8 text-slate-300 sm:text-lg">
                 A Estação Giglioli acompanha o aluno do Infantil 2 ao 5º ano, com inglês desde o Infantil 3 e uma rotina que integra aprendizagem, acolhimento, natação, futsal, ballet, hidroginástica e recreação direcionada.
               </p>
+              <p className="mt-4 max-w-2xl text-sm font-semibold leading-7 text-slate-400 sm:text-base">
+                A proposta conecta sala de aula, movimento e convivência em uma experiência escolar contínua. Cada atividade complementa o desenvolvimento acadêmico, social e corporal, respeitando a fase de cada criança e mantendo a família próxima do percurso escolar.
+              </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-full bg-gradient-to-r from-orange-400 to-yellow-300 px-6 text-sm font-black text-[#082047] shadow-[0_18px_45px_rgba(255,166,37,.28)] transition hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(255,190,45,.38)]">
                   Quero conhecer para matricular →
                 </a>
-                <a href="/" className="inline-flex min-h-14 items-center justify-center rounded-full border border-cyan-300/25 bg-white/5 px-6 text-sm font-black text-white backdrop-blur transition hover:-translate-y-1 hover:border-cyan-200/60 hover:shadow-[0_0_28px_rgba(74,210,255,.18)]">
-                  ← Voltar para a página inicial
+                <a href="/segmentos" className="inline-flex min-h-14 items-center justify-center rounded-full border border-cyan-300/25 bg-white/5 px-6 text-sm font-black text-white backdrop-blur transition hover:-translate-y-1 hover:border-cyan-200/60 hover:shadow-[0_0_28px_rgba(74,210,255,.18)]">
+                  Ver segmentos da escola →
                 </a>
               </div>
             </div>
@@ -71,7 +83,7 @@ export default function EstacaoPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <span className="text-xs font-black tracking-[.18em] text-cyan-300">EXPERIÊNCIAS DA ESTAÇÃO</span>
             <h2 className="mt-3 max-w-3xl font-[var(--font-display)] text-4xl font-black tracking-tight sm:text-5xl">Muito além da sala de aula.</h2>
-            <p className="mt-4 max-w-3xl font-bold leading-7 text-slate-300">Conheça o que faz parte da rotina atual do Colégio Giglioli. Passe o mouse sobre os módulos: cada um acende como uma estrela da nossa constelação.</p>
+            <p className="mt-4 max-w-3xl font-bold leading-7 text-slate-300">Conheça o que faz parte da rotina atual do Colégio Giglioli. Cada experiência amplia oportunidades de aprender, conviver, movimentar-se e desenvolver novas habilidades.</p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {atividades.map(([icon, title, text]) => (
@@ -104,6 +116,19 @@ export default function EstacaoPage() {
                 <p className="mt-4 font-bold leading-7 text-slate-500">Natação, futsal, ballet, hidroginástica e recreação direcionada ampliam a experiência escolar.</p>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section className="border-y border-white/10 bg-[#081c3c] py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <h2 className="font-[var(--font-display)] text-3xl font-black sm:text-4xl">Continue conhecendo o Colégio Giglioli</h2>
+            <p className="mt-3 max-w-3xl font-bold leading-7 text-slate-300">Veja os segmentos atendidos, conheça mais sobre a escola, leia experiências compartilhadas por famílias e fale com a equipe para organizar sua visita.</p>
+            <nav aria-label="Conteúdos relacionados" className="mt-7 flex flex-wrap gap-3">
+              <a href="/segmentos" className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-black hover:border-cyan-300/40">Segmentos →</a>
+              <a href="/escola" className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-black hover:border-cyan-300/40">A escola →</a>
+              <a href="/depoimentos" className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-black hover:border-cyan-300/40">Depoimentos →</a>
+              <a href="/contato" className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-black hover:border-cyan-300/40">Contato e matrícula →</a>
+            </nav>
           </div>
         </section>
 

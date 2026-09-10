@@ -7,6 +7,7 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const links = [
     ["A escola", "/escola"],
+    ["Estação", "/estacao"],
     ["Estrutura", "/estrutura"],
     ["Segmentos", "/segmentos"],
     ["Projetos", "/projetos"],
