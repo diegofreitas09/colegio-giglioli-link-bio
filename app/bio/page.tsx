@@ -2,9 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Links | Colégio Giglioli",
-  description: "Acesse os principais canais oficiais do Colégio Giglioli.",
-  alternates: { canonical: "/bio" }
+  title: "Links oficiais do Colégio Giglioli | Fortaleza",
+  description:
+    "Acesse os links oficiais do Colégio Giglioli em Fortaleza: Secretaria, Direção, site, localização, avaliação, segmentos, depoimentos e matrícula.",
+  alternates: { canonical: "/bio" },
+  openGraph: {
+    title: "Links oficiais do Colégio Giglioli | Fortaleza",
+    description:
+      "Encontre os principais canais oficiais do Colégio Giglioli e acesse informações sobre a escola, segmentos, localização e matrícula.",
+    url: "/bio",
+    type: "website"
+  },
+  robots: { index: true, follow: true }
 };
 
 const secretaria = "5585999725279";
@@ -138,10 +147,13 @@ export default function BioPage() {
           CONEXÕES OFICIAIS
         </span>
         <h1 className="mt-4 text-center font-[var(--font-display)] text-4xl font-black tracking-[-.035em] sm:text-5xl">
-          Colégio Giglioli
+          Links oficiais do Colégio Giglioli
         </h1>
         <p className="mt-3 max-w-md text-center text-sm font-bold leading-6 text-slate-300 sm:text-base">
-          Escolha abaixo como você deseja falar com a nossa escola.
+          Encontre em um só lugar os principais canais oficiais da escola: atendimento, Direção, site, localização e avaliação no Google.
+        </p>
+        <p className="mt-3 max-w-md text-center text-sm font-semibold leading-6 text-slate-400">
+          Você também pode conhecer os segmentos atendidos, a Estação Giglioli, ler depoimentos de famílias e acessar a página de contato para informações sobre matrícula e visita.
         </p>
 
         <div className="bio-mascot relative mt-3 h-28 w-28 sm:absolute sm:-right-20 sm:top-24 sm:mt-0 sm:h-40 sm:w-40" aria-hidden="true">
@@ -159,9 +171,17 @@ export default function BioPage() {
           <LinkCard href={secretariaWhatsapp} icon="💬" title="SECRETARIA" subtitle="(85) 99972-5279" />
           <LinkCard icon="🎓" title="COORDENAÇÃO" subtitle="Contato será adicionado em breve" disabled />
           <LinkCard href={direcaoWhatsapp} icon="⭐" title="DIREÇÃO" subtitle="(85) 99603-0509" />
+          <LinkCard href="/segmentos" icon="🪐" title="SEGMENTOS" subtitle="Educação Infantil ao 5º ano" />
+          <LinkCard href="/estacao" icon="🚀" title="ESTAÇÃO GIGLIOLI" subtitle="Estrutura, atividades e proposta" />
+          <LinkCard href="/depoimentos" icon="💙" title="DEPOIMENTOS" subtitle="Experiências compartilhadas por famílias" />
+          <LinkCard href="/contato" icon="🎒" title="MATRÍCULA E CONTATO" subtitle="Tire dúvidas e solicite atendimento" />
           <LinkCard href="https://colegiogiglioli.com.br/" icon="🌐" title="SITE" subtitle="Conheça o Colégio Giglioli" />
           <LinkCard href={localizacao} icon="📍" title="LOCALIZAÇÃO" subtitle="Abra a rota no Google Maps" />
           <LinkCard href={avaliacao} icon="★" title="AVALIAÇÃO" subtitle="Veja e deixe sua avaliação no Google" />
+        </div>
+
+        <div className="mt-8 max-w-md rounded-[24px] border border-white/10 bg-white/[0.055] p-5 text-center text-sm font-semibold leading-6 text-slate-300">
+          O Colégio Giglioli atende da Educação Infantil ao 5º ano do Ensino Fundamental em Fortaleza. Use os links acima para navegar pelas informações oficiais e escolher o melhor caminho para falar com a escola.
         </div>
 
         <div className="mt-8 flex items-center gap-2 text-center text-[10px] font-black tracking-[.12em] text-slate-500">
