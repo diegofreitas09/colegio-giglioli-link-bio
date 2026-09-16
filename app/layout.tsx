@@ -57,10 +57,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" }
+      { url: "/favicon.png", type: "image/png", sizes: "96x96" }
     ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg"
+    shortcut: "/favicon.png",
+    apple: "/favicon.png"
   },
   manifest: "/manifest.webmanifest"
 };
@@ -89,7 +89,7 @@ const schoolJsonLd = {
       name: "Colégio Giglioli",
       url: `${siteUrl}/`,
       image: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
-      logo: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
+      logo: `${siteUrl}/favicon.png`,
       telephone: "+55 85 99972-5279",
       address: {
         "@type": "PostalAddress",
