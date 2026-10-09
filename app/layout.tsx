@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Colégio Giglioli",
   title: {
-    default: "Colégio Giglioli | Site Oficial em Fortaleza",
+    default: "Colégio Giglioli | Educação Infantil e Fundamental em Fortaleza",
     template: "%s"
   },
   description: "Site oficial do Colégio Giglioli em Fortaleza — Educação Infantil ao 5º ano, inglês desde o Infantil 3, natação, ballet, futsal, hidroginástica e recreação direcionada.",
@@ -41,19 +41,19 @@ export const metadata: Metadata = {
   },
   verification: googleVerification ? { google: googleVerification } : undefined,
   openGraph: {
-    title: "Colégio Giglioli | Site Oficial em Fortaleza",
+    title: "Colégio Giglioli | Educação Infantil e Fundamental em Fortaleza",
     description: "Conheça o Colégio Giglioli, da Educação Infantil ao 5º ano, e fale com a equipe de matrícula.",
     url: siteUrl,
     siteName: "Colégio Giglioli",
-    images: ["/assets/gigi-astronauta.webp"],
+    images: ["/assets/logo-giglioli.webp"],
     type: "website",
     locale: "pt_BR"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Colégio Giglioli | Site Oficial em Fortaleza",
+    title: "Colégio Giglioli | Educação Infantil e Fundamental em Fortaleza",
     description: "Educação Infantil ao 5º ano em Fortaleza.",
-    images: ["/assets/gigi-astronauta.webp"]
+    images: ["/assets/logo-giglioli.webp"]
   },
   icons: {
     icon: [
@@ -88,8 +88,8 @@ const schoolJsonLd = {
       "@id": `${siteUrl}/#school`,
       name: "Colégio Giglioli",
       url: `${siteUrl}/`,
-      image: `${siteUrl}/assets/logo-giglioli-vetorial.svg`,
-      logo: `${siteUrl}/favicon.png`,
+      image: `${siteUrl}/assets/logo-giglioli.webp`,
+      logo: `${siteUrl}/assets/logo-giglioli.webp`,
       telephone: "+55 85 99972-5279",
       address: {
         "@type": "PostalAddress",
